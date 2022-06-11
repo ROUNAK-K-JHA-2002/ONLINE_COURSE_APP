@@ -1,8 +1,8 @@
 // ignore: file_names
+import 'package:eduapp/Screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Sign_Up_Screen.dart';
-import 'HomeScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((value) {
         Fluttertoast.showToast(msg: "Login Successful");
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
+            MaterialPageRoute(builder: (context) => const HomePage()));
       }).catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });

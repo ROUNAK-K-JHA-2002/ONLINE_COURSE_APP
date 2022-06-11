@@ -2,22 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class ChemistryPage extends StatefulWidget {
-  const ChemistryPage({Key? key}) : super(key: key);
+class LifeSciencePage extends StatefulWidget {
+  const LifeSciencePage({Key? key}) : super(key: key);
 
   @override
-  State<ChemistryPage> createState() => _ChemistryPageState();
+  State<LifeSciencePage> createState() => _LifeSciencePageState();
 }
 
-class _ChemistryPageState extends State<ChemistryPage> {
+class _LifeSciencePageState extends State<LifeSciencePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Chemistry",
+          "Life Science",
         ),
-        backgroundColor: Color.fromARGB(255, 248, 153, 71),
+        backgroundColor: Color.fromARGB(255, 255, 62, 248),
       ),
       body: Container(
         // color: Color.fromARGB(255, 247, 209, 255),
@@ -49,7 +49,7 @@ class _ChemistryPageState extends State<ChemistryPage> {
                           horizontal: MediaQuery.of(context).size.width * 0.03),
                       alignment: Alignment.centerLeft,
                       child: const Text(
-                        "Organic Chemistry",
+                        "Cell Biology",
                         style: TextStyle(
                           fontSize: 23.0,
                         ),
@@ -261,7 +261,7 @@ class _ChemistryPageState extends State<ChemistryPage> {
                         Column(
                           children: const <Widget>[
                             Text(
-                              "General Relativity",
+                              "Need of Intersecting LT & FT",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 18.0,
@@ -306,7 +306,7 @@ class _ChemistryPageState extends State<ChemistryPage> {
                         Column(
                           children: const <Widget>[
                             Text(
-                              "Special Relativity",
+                              "Laplace Transformation",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 18.0,
