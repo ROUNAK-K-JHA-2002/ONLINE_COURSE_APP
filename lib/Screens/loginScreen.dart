@@ -1,9 +1,11 @@
 // ignore: file_names
+import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Sign_Up_Screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -82,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
         minWidth: MediaQuery.of(context).size.width,
         child: const Text(
-          "Login",
+          "Sign in",
           style: TextStyle(
               fontWeight: FontWeight.w600, fontSize: 20.0, color: Colors.white),
         ),
@@ -91,90 +93,147 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
-
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Color.fromARGB(241, 64, 3, 246),
-            Color.fromARGB(245, 234, 4, 255),
-          ],
-        ),
-      ),
-      child: Column(children: <Widget>[
-        Expanded(
-            child: SizedBox(
-          height: MediaQuery.of(context).size.width * 0.02,
-          child: Image.asset('assets/images/login_logo.jpeg'),
-        )),
-        Expanded(
-            child: Container(
-          margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 10.0, // soften the shadow
-                spreadRadius: 5.0, //extend the shadow
-                offset: Offset(
-                  10.0, // Move to right 10  horizontally
-                  5.0, // Move to bottom 10 Vertically
-                ),
-              )
+    // ignore: non_constant_identifier_names
+    final GoogleSignInBtn = Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(20.0),
+        child: MaterialButton(
+          padding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.width * 0.03),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                  flex: 1,
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.08,
+                    child: Image.asset('assets/images/google_logo.png'),
+                  )),
+              const Expanded(
+                  flex: 2,
+                  child: Text(
+                    "Sign In With google",
+                    style: TextStyle(fontSize: 21.0),
+                  ))
             ],
           ),
-          child: Material(
-            child: Form(
-                key: _formkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    emailfield,
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    passwordfield,
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    loginButton,
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          "Don't have a account ? ",
-                          style: TextStyle(fontSize: 18.0),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignUp()));
-                          },
-                          child: const Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue),
-                          ),
-                        )
-                      ],
+          onPressed: () async {
+            await FirebaseServices().SignInWithGoogle();
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const HomePage())));
+          },
+        ));
+
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(235, 86, 61, 248),
+              Color.fromARGB(255, 226, 3, 255),
+            ],
+          ),
+        ),
+        child: Column(children: <Widget>[
+          Expanded(
+              flex: 2,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width * 0.7,
+                child: Image.asset('assets/images/login_logo.png'),
+              )),
+          Expanded(
+              flex: 1,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.width * 0.03),
+                child: const Text(
+                  "Welcome",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 35.0,
+                    decoration: TextDecoration.none,
+                    color: Color.fromARGB(255, 245, 243, 243),
+                  ),
+                ),
+              )),
+          Expanded(
+              flex: 4,
+              child: Container(
+                margin:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: const Color.fromARGB(255, 251, 249, 249),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black54,
+                      blurRadius: 10.0, // soften the shadow
+                      spreadRadius: 5.0, //extend the shadow
+                      offset: Offset(
+                        10.0, // Move to right 10  horizontally
+                        5.0, // Move to bottom 10 Vertically
+                      ),
                     )
                   ],
+                ),
+                child: SingleChildScrollView(
+                    child: Material(
+                  child: Form(
+                      key: _formkey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          emailfield,
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          passwordfield,
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          loginButton,
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Text(
+                                "Don't have a account ? ",
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignUp()));
+                                },
+                                child: const Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blue),
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          GoogleSignInBtn
+                        ],
+                      )),
                 )),
-          ),
-        )),
-      ]),
+              )),
+        ]),
+      ),
     );
   }
 

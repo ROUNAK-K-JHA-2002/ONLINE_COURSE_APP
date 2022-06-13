@@ -1,3 +1,4 @@
+import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(104, 254, 192, 249),
+        color: const Color.fromARGB(104, 254, 192, 249),
         child: Column(children: <Widget>[
           Container(
             margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
@@ -96,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                           size: 35.0,
                         ),
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        await FirebaseServices().signOut();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -114,355 +116,347 @@ class _HomePageState extends State<HomePage> {
                       top: MediaQuery.of(context).size.width * 0.1,
                       left: MediaQuery.of(context).size.width * 0.1,
                       right: MediaQuery.of(context).size.width * 0.1),
-                  child: const TextField(
-                    cursorColor: Color.fromARGB(213, 101, 30, 255),
-                    decoration: InputDecoration(
-                        fillColor: Color.fromARGB(255, 255, 252, 252),
-                        filled: true,
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                        hintText: 'Search ...',
-                        hintStyle: TextStyle(color: Colors.deepPurple)),
-                  ),
-                  width: MediaQuery.of(context).size.width * 1,
-                ),
-                const Positioned(
-                  // right: ,
-                  left: 48,
-                  top: 195,
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.deepPurple,
-                    size: 33.0,
-                  ),
-                ),
-                const Positioned(
-                  // right: ,
-                  right: 50,
-                  top: 195,
-                  child: Icon(
-                    Icons.mic,
-                    color: Colors.deepPurple,
-                    size: 33.0,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.0195),
+                            child: const Icon(
+                              Icons.search,
+                              color: Colors.deepPurple,
+                              size: 33.0,
+                            ),
+                          )),
+                      const Expanded(
+                          flex: 3,
+                          child: TextField(
+                            cursorColor: Color.fromARGB(213, 101, 30, 255),
+                            decoration: InputDecoration(
+                                fillColor: Color.fromARGB(255, 255, 252, 252),
+                                filled: true,
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 15),
+                                hintText: 'Search ...',
+                                hintStyle: TextStyle(color: Colors.deepPurple)),
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.width * 0.0195),
+                            child: const Icon(
+                              Icons.mic,
+                              color: Colors.deepPurple,
+                              size: 33.0,
+                            ),
+                          ))
+                    ],
                   ),
                 )
               ],
             ),
           ),
           Expanded(
-            child: ListView(
+            child: Column(
               children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: const Text(
-                      "Explore",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.w500),
-                    ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.width * 0.05),
+                  child: const Text(
+                    "Explore",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
                   ),
                 ),
                 Expanded(
-                    child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: InkWell(
-                        child: Container(
-                            height: MediaQuery.of(context).size.height * 0.28,
-                            margin: EdgeInsets.all(
-                                MediaQuery.of(context).size.width * 0.03),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromARGB(94, 38, 35, 35),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
-                                    offset: Offset(4, 4)),
-                              ],
+                    flex: 3,
+                    child: ListView(children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: InkWell(
+                              child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.28,
+                                  margin: EdgeInsets.all(
+                                      MediaQuery.of(context).size.width * 0.03),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(94, 38, 35, 35),
+                                          blurRadius: 5,
+                                          spreadRadius: 2,
+                                          offset: Offset(4, 4)),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          alignment: Alignment.topCenter,
+                                          padding: EdgeInsets.all(
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.04),
+                                          child: Image.asset(
+                                              'assets/images/maths.png'),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          margin: EdgeInsets.symmetric(
+                                              vertical: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.02),
+                                          child: const Text(
+                                            "MATHEMATICS",
+                                            style: TextStyle(
+                                                fontSize: 22.0,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                      ),
+                                      const Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          "20 Courses",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MathsPage()));
+                              },
                             ),
-                            child: Column(
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    alignment: Alignment.topCenter,
-                                    padding: EdgeInsets.all(
-                                        MediaQuery.of(context).size.width *
-                                            0.04),
-                                    child:
-                                        Image.asset('assets/images/maths.png'),
-                                  ),
+                          ),
+                          Expanded(
+                              child: InkWell(
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.28,
+                                margin: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width * 0.03),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Color.fromARGB(94, 38, 35, 35),
+                                        blurRadius: 5,
+                                        spreadRadius: 2,
+                                        offset: Offset(4, 4)),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical:
-                                            MediaQuery.of(context).size.height *
-                                                0.02),
-                                    child: const Text(
-                                      "MATHEMATICS",
-                                      style: TextStyle(
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.w400),
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        alignment: Alignment.topCenter,
+                                        padding: EdgeInsets.all(
+                                            MediaQuery.of(context).size.width *
+                                                0.04),
+                                        child: Image.asset(
+                                            'assets/images/physics.png'),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                const Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    "20 Courses",
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w300),
-                                  ),
-                                ),
-                              ],
-                            )),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MathsPage()));
-                        },
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02),
+                                        child: const Text(
+                                          "PHYSICS",
+                                          style: TextStyle(
+                                              fontSize: 25.0,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                    const Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "20 Courses",
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            onTap: (() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PhysicsPage()));
+                            }),
+                          ))
+                        ],
                       ),
-                    ),
-                    Expanded(
-                        child: InkWell(
-                      child: Container(
-                          height: MediaQuery.of(context).size.height * 0.28,
-                          margin: EdgeInsets.all(
-                              MediaQuery.of(context).size.width * 0.03),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(94, 38, 35, 35),
-                                  blurRadius: 5,
-                                  spreadRadius: 2,
-                                  offset: Offset(4, 4)),
-                            ],
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width * 0.04),
-                                  child:
-                                      Image.asset('assets/images/physics.png'),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: InkWell(
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.28,
+                                margin: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width * 0.03),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Color.fromARGB(94, 38, 35, 35),
+                                        blurRadius: 5,
+                                        spreadRadius: 2,
+                                        offset: Offset(4, 4)),
+                                  ],
                                 ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical:
-                                          MediaQuery.of(context).size.height *
-                                              0.02),
-                                  child: const Text(
-                                    "PHYSICS",
-                                    style: TextStyle(
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ),
-                              const Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "20 Courses",
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                            ],
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        alignment: Alignment.topCenter,
+                                        padding: EdgeInsets.all(
+                                            MediaQuery.of(context).size.width *
+                                                0.04),
+                                        child: Image.asset(
+                                            'assets/images/chemistry.png'),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02),
+                                        child: const Text(
+                                          "CHEMISTRY",
+                                          style: TextStyle(
+                                              fontSize: 25.0,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                    const Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "20 Courses",
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChemistryPage()));
+                            },
                           )),
-                      onTap: (() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PhysicsPage()));
-                      }),
-                    ))
-                  ],
-                )),
-                Expanded(
-                    child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: InkWell(
-                      child: Container(
-                          height: MediaQuery.of(context).size.height * 0.28,
-                          margin: EdgeInsets.all(
-                              MediaQuery.of(context).size.width * 0.03),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(94, 38, 35, 35),
-                                  blurRadius: 5,
-                                  spreadRadius: 2,
-                                  offset: Offset(4, 4)),
-                            ],
+                          Expanded(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.28,
+                              margin: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.03),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Color.fromARGB(94, 38, 35, 35),
+                                      blurRadius: 5,
+                                      spreadRadius: 2,
+                                      offset: Offset(4, 4)),
+                                ],
+                              ),
+                              child: InkWell(
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        alignment: Alignment.topCenter,
+                                        padding: EdgeInsets.all(
+                                            MediaQuery.of(context).size.width *
+                                                0.04),
+                                        child: Image.asset(
+                                            'assets/images/life.png'),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02),
+                                        child: const Text(
+                                          "LIFE SCIENCE",
+                                          style: TextStyle(
+                                              fontSize: 23.0,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                    const Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        "20 Courses",
+                                        style: TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LifeSciencePage()));
+                                },
+                              ),
+                            ),
                           ),
-                          child: Column(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width * 0.04),
-                                  child: Image.asset(
-                                      'assets/images/chemistry.png'),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical:
-                                          MediaQuery.of(context).size.height *
-                                              0.02),
-                                  child: const Text(
-                                    "CHEMISTRY",
-                                    style: TextStyle(
-                                        fontSize: 25.0,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ),
-                              const Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "20 Courses",
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                            ],
-                          )),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ChemistryPage()));
-                      },
-                    )),
-                    Expanded(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.28,
-                        margin: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.03),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromARGB(94, 38, 35, 35),
-                                blurRadius: 5,
-                                spreadRadius: 2,
-                                offset: Offset(4, 4)),
-                          ],
-                        ),
-                        child: InkWell(
-                          child: Column(
-                            children: <Widget>[
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width * 0.04),
-                                  child: Image.asset('assets/images/life.png'),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical:
-                                          MediaQuery.of(context).size.height *
-                                              0.02),
-                                  child: const Text(
-                                    "LIFE SCIENCE",
-                                    style: TextStyle(
-                                        fontSize: 23.0,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ),
-                              const Expanded(
-                                flex: 1,
-                                child: Text(
-                                  "20 Courses",
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const LifeSciencePage()));
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
+                        ],
+                      )
+                    ])),
               ],
             ),
           )
         ]),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          selectedFontSize: 20,
-          selectedIconTheme:
-              const IconThemeData(color: Colors.deepPurple, size: 20),
-          selectedItemColor: Colors.deepPurple,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          unselectedItemColor: Colors.deepOrangeAccent,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.star,
-                color: Colors.deepPurple,
-              ),
-              label: 'Featured',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.play_circle_fill_rounded,
-                color: Colors.deepPurple,
-              ),
-              label: 'Learning',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.heart_broken_rounded,
-                color: Colors.deepPurple,
-              ),
-              label: 'Wishlist',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.deepPurple,
-              ),
-              label: 'Settings',
-            ),
-          ]),
     );
   }
 }

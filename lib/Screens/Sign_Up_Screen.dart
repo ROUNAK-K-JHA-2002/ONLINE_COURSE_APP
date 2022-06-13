@@ -169,88 +169,109 @@ class _SignUpState extends State<SignUp> {
       ),
     );
 
-    return Container(
-        decoration: const BoxDecoration(
-          color: Colors.blue,
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(240, 3, 48, 246),
-              Color.fromARGB(245, 255, 4, 130),
-            ],
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Container(
+          decoration: const BoxDecoration(
+            color: Colors.blue,
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color.fromARGB(240, 3, 48, 246),
+                Color.fromARGB(245, 255, 4, 130),
+              ],
+            ),
           ),
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.width * 0.15,
-              horizontal: MediaQuery.of(context).size.width * 0.05),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 5.0, // soften the shadow
-                spreadRadius: 5.0, //extend the shadow
-                offset: Offset(
-                  5.0, // Move to right 10  horizontally
-                  5.0, // Move to bottom 10 Vertically
+          child: Container(
+            margin: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.width * 0.15,
+                horizontal: MediaQuery.of(context).size.width * 0.05),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15.0),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 5.0, // soften the shadow
+                  spreadRadius: 5.0, //extend the shadow
+                  offset: Offset(
+                    5.0, // Move to right 10  horizontally
+                    5.0, // Move to bottom 10 Vertically
+                  ),
+                )
+              ],
+            ),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset('assets/images/signup.png'),
+                    margin: EdgeInsets.all(
+                        MediaQuery.of(context).size.width * 0.02),
+                  ),
                 ),
-              )
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                alignment: Alignment.topCenter,
-                height: MediaQuery.of(context).size.width * 0.4,
-                child: Image.asset('assets/images/signup.png'),
-                margin:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.08),
-              ),
-              Expanded(
-                child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.03),
-                    child: Material(
-                      child: Form(
-                        key: _formkey,
-                        child: Column(
-                          children: [
-                            firstNamefield,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            lastNamefield,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            emailfield,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            passwordfield1,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            passwordfield2,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            SignupButton,
-                            const SizedBox(
-                              height: 15,
-                            ),
-                          ],
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.width * 0.03),
+                      child: const Text(
+                        "Welcome",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.none,
+                          color: Color.fromARGB(255, 135, 2, 251),
                         ),
                       ),
                     )),
-              )
-            ],
-          ),
-        ));
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.05),
+                      child: Material(
+                          child: SingleChildScrollView(
+                        child: Form(
+                          key: _formkey,
+                          child: Column(
+                            children: [
+                              firstNamefield,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              lastNamefield,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              emailfield,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              passwordfield1,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              passwordfield2,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              SignupButton,
+                              const SizedBox(
+                                height: 15,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ))),
+                )
+              ],
+            ),
+          )),
+    );
   }
 
   // ignore: non_constant_identifier_names

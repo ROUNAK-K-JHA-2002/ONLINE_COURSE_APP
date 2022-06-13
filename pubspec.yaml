@@ -34,6 +34,8 @@ dependencies:
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.9
+  google_fonts: ^3.0.1
+  google_sign_in: ^5.3.3
   percent_indicator: ^4.2.2
   youtube_player_iframe: ^2.3.0
 

@@ -17,370 +17,364 @@ class _LifeSciencePageState extends State<LifeSciencePage> {
         title: const Text(
           "Life Science",
         ),
-        backgroundColor: Color.fromARGB(255, 255, 62, 248),
+        backgroundColor: Color.fromARGB(255, 19, 74, 252),
       ),
-      body: Container(
-        // color: Color.fromARGB(255, 247, 209, 255),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                )),
-            Expanded(
+      body: Column(
+        children: <Widget>[
+          Expanded(
               flex: 1,
               child: Container(
-                margin:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-                padding:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Colors.yellowAccent),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.03,
-                          horizontal: MediaQuery.of(context).size.width * 0.03),
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        "Cell Biology",
-                        style: TextStyle(
-                          fontSize: 23.0,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.01,
-                          horizontal: MediaQuery.of(context).size.width * 0.03),
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        "Created by Rounak Kumar Jha",
-                        style: TextStyle(
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.02),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            child: Row(children: const <Widget>[
-                              Icon(
-                                Icons.star_border_outlined,
-                                size: 25.0,
-                              ),
-                              Text(
-                                "4.4",
-                                style: TextStyle(fontSize: 20.0),
-                              ),
-                            ]),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal:
-                                    MediaQuery.of(context).size.width * 0.02),
-                            child: Row(children: const <Widget>[
-                              Icon(
-                                Icons.timer_outlined,
-                                size: 25.0,
-                              ),
-                              Text(
-                                "175 hours",
-                                style: TextStyle(fontSize: 17.0),
-                              ),
-                            ]),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                decoration: const BoxDecoration(
+                  color: Colors.white,
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                decoration: BoxDecoration(
+              )),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
-                  color: const Color.fromARGB(255, 134, 253, 203),
-                ),
-                margin:
-                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
-                padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.width * 0.04,
-                    horizontal: MediaQuery.of(context).size.width * 0.03),
-                child: ListView(children: <Widget>[
-                  Expanded(
+                  color: Colors.deepOrangeAccent.shade200),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.03,
+                        horizontal: MediaQuery.of(context).size.width * 0.03),
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Cell Biology",
+                      style: TextStyle(
+                        fontSize: 23.0,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.01,
+                        horizontal: MediaQuery.of(context).size.width * 0.03),
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Created by Rounak Kumar Jha",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.02),
                     child: Row(
                       children: <Widget>[
-                        Expanded(
-                            child: Material(
-                          elevation: 5,
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: Color.fromARGB(255, 181, 43, 240),
-                          child: MaterialButton(
-                            padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            onPressed: (() {}),
-                            child: const Text("Playlist"),
-                          ),
-                        )),
-                        Expanded(
-                            child: Material(
-                          elevation: 5,
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 242, 241, 245),
-                          child: MaterialButton(
-                            onPressed: (() {}),
-                            child: const Text("Description"),
-                          ),
-                        ))
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.02),
+                          child: Row(children: const <Widget>[
+                            Icon(
+                              Icons.star_border_outlined,
+                              size: 25.0,
+                            ),
+                            Text(
+                              "4.4",
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ]),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.02),
+                          child: Row(children: const <Widget>[
+                            Icon(
+                              Icons.timer_outlined,
+                              size: 25.0,
+                            ),
+                            Text(
+                              "175 hours",
+                              style: TextStyle(fontSize: 17.0),
+                            ),
+                          ]),
+                        ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.025),
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.04),
-                      child: Row(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width * 0.02),
-                          child: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 40.0,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                        ),
-                        Column(
-                          children: const <Widget>[
-                            Text(
-                              "Quantum Mechanics",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "5 hours : 1 Lectures",
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.25),
-                          child: const Icon(
-                            Icons.check_circle_rounded,
-                            size: 35.0,
-                            color: Color.fromARGB(255, 90, 193, 12),
-                          ),
-                        )
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.025),
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.04),
-                      child: Row(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width * 0.02),
-                          child: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 40.0,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                        ),
-                        Column(
-                          children: const <Widget>[
-                            Text(
-                              "Relativity and Bohrs Model",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "2.5 hours : 2 Lectures",
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.09),
-                          child: const Icon(
-                            Icons.lock_clock_rounded,
-                            size: 35.0,
-                            color: Colors.amber,
-                          ),
-                        )
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.025),
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.04),
-                      child: Row(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width * 0.02),
-                          child: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 40.0,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                        ),
-                        Column(
-                          children: const <Widget>[
-                            Text(
-                              "Need of Intersecting LT & FT",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "3 hours : 4 Lectures",
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.11),
-                          child: const Icon(
-                            Icons.lock_clock_rounded,
-                            size: 35.0,
-                            color: Colors.amber,
-                          ),
-                        )
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.025),
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.04),
-                      child: Row(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width * 0.02),
-                          child: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 40.0,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                        ),
-                        Column(
-                          children: const <Widget>[
-                            Text(
-                              "Laplace Transformation",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "3 hours : 6 Lectures",
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.19),
-                          child: const Icon(
-                            Icons.lock_clock_rounded,
-                            size: 35.0,
-                            color: Colors.amber,
-                          ),
-                        )
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.025),
-                      padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.04),
-                      child: Row(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width * 0.02),
-                          child: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 40.0,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                        ),
-                        Column(
-                          children: const <Widget>[
-                            Text(
-                              "Fourier Transform",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "2 hours : 4 Lectures",
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.31),
-                          child: const Icon(
-                            Icons.lock_clock_rounded,
-                            size: 35.0,
-                            color: Colors.amber,
-                          ),
-                        )
-                      ]),
-                    ),
-                  )
-                ]),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: const Color.fromARGB(255, 134, 253, 203),
+              ),
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.width * 0.04,
+                  horizontal: MediaQuery.of(context).size.width * 0.03),
+              child: ListView(children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color.fromARGB(255, 181, 43, 240),
+                        child: MaterialButton(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.03),
+                          onPressed: (() {}),
+                          child: const Text("Playlist"),
+                        ),
+                      )),
+                      Expanded(
+                          child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: const Color.fromARGB(255, 242, 241, 245),
+                        child: MaterialButton(
+                          onPressed: (() {}),
+                          child: const Text("Description"),
+                        ),
+                      ))
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.025),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04),
+                    child: Row(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02),
+                        child: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 40.0,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                      Column(
+                        children: const <Widget>[
+                          Text(
+                            "Biotechnology",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "5 hours : 1 Lectures",
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.32),
+                        child: const Icon(
+                          Icons.check_circle_rounded,
+                          size: 35.0,
+                          color: Color.fromARGB(255, 90, 193, 12),
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.025),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04),
+                    child: Row(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02),
+                        child: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 40.0,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                      Column(
+                        children: const <Widget>[
+                          Text(
+                            "Relativity and Bohrs Model",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "2.5 hours : 2 Lectures",
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.09),
+                        child: const Icon(
+                          Icons.lock_clock_rounded,
+                          size: 35.0,
+                          color: Colors.amber,
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.025),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04),
+                    child: Row(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02),
+                        child: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 40.0,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                      Column(
+                        children: const <Widget>[
+                          Text(
+                            "Need of Intersecting LT & FT",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "3 hours : 4 Lectures",
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.11),
+                        child: const Icon(
+                          Icons.lock_clock_rounded,
+                          size: 35.0,
+                          color: Colors.amber,
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.025),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04),
+                    child: Row(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02),
+                        child: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 40.0,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                      Column(
+                        children: const <Widget>[
+                          Text(
+                            "Laplace Transformation",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "3 hours : 6 Lectures",
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.19),
+                        child: const Icon(
+                          Icons.lock_clock_rounded,
+                          size: 35.0,
+                          color: Colors.amber,
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.025),
+                    padding: EdgeInsets.symmetric(
+                        vertical: MediaQuery.of(context).size.width * 0.04),
+                    child: Row(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02),
+                        child: const Icon(
+                          Icons.play_circle_fill_rounded,
+                          size: 40.0,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                      Column(
+                        children: const <Widget>[
+                          Text(
+                            "Fourier Transform",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "2 hours : 4 Lectures",
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.31),
+                        child: const Icon(
+                          Icons.lock_clock_rounded,
+                          size: 35.0,
+                          color: Colors.amber,
+                        ),
+                      )
+                    ]),
+                  ),
+                )
+              ]),
+            ),
+          )
+        ],
       ),
     );
   }
