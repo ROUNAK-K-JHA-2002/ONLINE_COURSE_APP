@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onTap: () async {
                         await FirebaseServices().signOut();
-                        Navigator.push(
+                        Navigator.pop(
                             context,
                             MaterialPageRoute(
                                 builder: ((context) => const LoginScreen())));

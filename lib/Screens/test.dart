@@ -1,25 +1,23 @@
 // ignore: file_names
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/HomePage.dart';
-import 'package:eduapp/Screens/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Sign_Up_Screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen1 extends StatefulWidget {
+  const LoginScreen1({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen1> createState() => _LoginScreen1State();
 }
 
-class _LoginScreenState extends State<LoginScreen>
+class _LoginScreen1State extends State<LoginScreen1>
     with SingleTickerProviderStateMixin {
   //form key
-  // ignore: prefer_final_fields
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
   //Tab Controller
   // TabController tabController = TabController(length: 1, vsync: this);
@@ -126,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pop(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: ((context) => const HomePage())));
           },
         ));
@@ -378,7 +376,7 @@ class _LoginScreenState extends State<LoginScreen>
           .then((value) {
         Fluttertoast.showToast(msg: "Login Successful");
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const MyStatefulWidget()));
+            MaterialPageRoute(builder: (context) => const HomePage()));
       }).catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
