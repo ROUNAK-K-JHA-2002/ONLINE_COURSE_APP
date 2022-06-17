@@ -10,12 +10,16 @@ class FirebaseServices {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googlesignin.signIn();
+      print("object1");
       if (googleSignInAccount != null) {
         final GoogleSignInAuthentication googleSignInAuthentication =
             await googleSignInAccount.authentication;
         final AuthCredential authCredential = GoogleAuthProvider.credential(
-            accessToken: googleSignInAuthentication.idToken);
+            accessToken: googleSignInAuthentication.accessToken,
+            idToken: googleSignInAuthentication.idToken);
+        print(googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
+        print("object2");
       }
     } on FirebaseAuthException catch (e) {
       print(e.message);

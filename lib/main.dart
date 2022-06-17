@@ -1,3 +1,4 @@
+import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const MyStatefulWidget()
+      },
     );
   }
 }

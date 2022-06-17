@@ -126,8 +126,8 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pop(context,
-                MaterialPageRoute(builder: ((context) => const HomePage())));
+            print("Checking");
+            Navigator.pushNamed(context, '/home');
           },
         ));
 

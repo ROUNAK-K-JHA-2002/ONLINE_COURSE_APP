@@ -47,7 +47,7 @@ class _MathsPageState extends State<MathsPage> {
           Expanded(
             flex: 1,
             child: Container(
-              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
               padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
@@ -81,7 +81,7 @@ class _MathsPageState extends State<MathsPage> {
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(
-                        vertical: MediaQuery.of(context).size.width * 0.02),
+                        vertical: MediaQuery.of(context).size.width * 0.01),
                     child: Row(
                       children: <Widget>[
                         Container(
@@ -139,9 +139,9 @@ class _MathsPageState extends State<MathsPage> {
                               horizontal:
                                   MediaQuery.of(context).size.width * 0.03,
                               vertical:
-                                  MediaQuery.of(context).size.width * 0.03),
+                                  MediaQuery.of(context).size.width * 0.02),
                           decoration: BoxDecoration(
-                              color: Colors.amber,
+                              color: Colors.lime.shade100,
                               borderRadius: BorderRadius.circular(25.0)),
                           child: Column(
                             children: [
@@ -210,7 +210,7 @@ class _MathsPageState extends State<MathsPage> {
                                             Column(
                                               children: const <Widget>[
                                                 Text(
-                                                  "Biotechnology",
+                                                  "Laplace Transformation ",
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontSize: 18.0,
@@ -228,7 +228,7 @@ class _MathsPageState extends State<MathsPage> {
                                                   left: MediaQuery.of(context)
                                                           .size
                                                           .width *
-                                                      0.32),
+                                                      0.15),
                                               child: const Icon(
                                                 Icons.check_circle_rounded,
                                                 size: 35.0,
