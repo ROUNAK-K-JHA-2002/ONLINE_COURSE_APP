@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseServices {
-  final _auth = FirebaseAuth.instance;
-  final _googlesignin = GoogleSignIn();
+  final _auth = FirebaseAuth.instance; //calling Firebase Auth
+  final _googlesignin = GoogleSignIn(); //calling Google Sign In function
 
   // ignore: non_constant_identifier_names
   SignInWithGoogle() async {

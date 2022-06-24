@@ -14,26 +14,47 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        title: Text("Profile Page"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.amber,
+      //   title: Text("Profile Page"),
+      // ),
       body: Container(
+        margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.004),
         color: Colors.amber.shade50,
         width: MediaQuery.of(context).size.width * 1,
         child: Column(children: [
           Container(
-            padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.width * 0.05),
-            child: Column(children: const <Widget>[
-              Icon(
-                Icons.account_circle,
-                size: 100.0,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(235, 10, 45, 247),
+                  Color.fromARGB(255, 217, 3, 255),
+                ],
               ),
-              Text(
-                " DEBUG TESTER",
-                style: TextStyle(fontSize: 25.0),
-              )
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            width: MediaQuery.of(context).size.width * 1,
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.18,
+                bottom: MediaQuery.of(context).size.width * 0.1),
+            child: Column(children: <Widget>[
+              Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child:
+                    Image.network(FirebaseAuth.instance.currentUser!.photoURL!),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text("${FirebaseAuth.instance.currentUser!.displayName}"),
+              Text("${FirebaseAuth.instance.currentUser!.email}"),
+              const SizedBox(
+                height: 20,
+              ),
             ]),
           ),
           Expanded(

@@ -18,8 +18,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    ExplorePage(),
     UploadsPage(),
+    ExplorePage(),
     ProfilePage()
   ];
 
@@ -44,12 +44,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: 'Explore',
+            icon: Icon(Icons.upload_file_rounded),
+            label: 'Upload',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.download_rounded),
-            label: 'Files',
+            label: 'Download',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_rounded),

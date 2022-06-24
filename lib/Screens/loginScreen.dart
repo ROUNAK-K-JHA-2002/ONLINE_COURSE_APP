@@ -126,8 +126,8 @@ class _LoginScreenState extends State<LoginScreen>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            print("Checking");
             Navigator.pushNamed(context, '/home');
+            Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));
 
