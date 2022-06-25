@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:eduapp/Google-services/firebase-services.dart';
+import 'package:eduapp/RoleBasedForm/AdminForm.dart';
 import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'Sign_Up_Screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../RoleBasedForm/AdminForm.dart';
+import '../RoleBasedForm/StudentForm.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,119 +20,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  //form key
-  // ignore: prefer_final_fields
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
-  //Tab Controller
-  // TabController tabController = TabController(length: 1, vsync: this);
-
-  // editing Controller
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-//FireBase
-  final _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     //emailField
-    final emailfield = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return ("Please Enter a Email Address");
-        }
-        if (!RegExp("^[a-zA-z0-9+_.-]+@[a-zA-z0-9.-]+.[a-z]").hasMatch(value)) {
-          return ("Please enter a valid email address");
-        }
-        return null;
-      },
-      onSaved: (value) {
-        emailController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.mail),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          hintText: "Email"),
-    );
-    //passwordField
-    final passwordfield = TextFormField(
-      autofocus: false,
-      obscureText: true,
-      controller: passwordController,
-      validator: (value) {
-        RegExp regex = RegExp(r'^.{6,}$');
-        if (value!.isEmpty) {
-          return ("Please Enter a password");
-        }
-        if (!regex.hasMatch(value)) {
-          return ("Please Enter a valid password.Min 6 Characters");
-        }
-        return null;
-      },
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          hintText: "Password"),
-    );
-
-    //Login button
-    final loginButton = Material(
-      elevation: 5,
-      color: Color.fromARGB(255, 83, 14, 243),
-      borderRadius: BorderRadius.circular(10.0),
-      child: MaterialButton(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-        minWidth: MediaQuery.of(context).size.width,
-        child: const Text(
-          "Sign in",
-          style: TextStyle(
-              fontWeight: FontWeight.w600, fontSize: 20.0, color: Colors.white),
-        ),
-        onPressed: () {
-          Signin(emailController.text, passwordController.text);
-        },
-      ),
-    );
-    // ignore: non_constant_identifier_names
-    final GoogleSignInBtn = Material(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            side: const BorderSide(color: Colors.black)),
-        child: MaterialButton(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.width * 0.03),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.08,
-                    child: Image.asset('assets/images/google_logo.png'),
-                  )),
-              const Expanded(
-                  flex: 2,
-                  child: Text(
-                    "Sign In With google",
-                    style: TextStyle(fontSize: 21.0),
-                  ))
-            ],
-          ),
-          onPressed: () async {
-            await FirebaseServices().SignInWithGoogle();
-            Navigator.pushNamed(context, '/home');
-            Fluttertoast.showToast(msg: "Login Sucessful");
-          },
-        ));
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -222,142 +115,11 @@ class _LoginScreenState extends State<LoginScreen>
                             ),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                             child: TabBarView(
                           children: [
-                            SingleChildScrollView(
-                                child: Material(
-                              child: Form(
-                                  key: _formkey,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text(
-                                        "Student's Portal",
-                                        style: TextStyle(
-                                            fontSize: 25.0,
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      emailfield,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      passwordfield,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      loginButton,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          const Text(
-                                            "Don't have a account ? ",
-                                            style: TextStyle(fontSize: 18.0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const SignUp()));
-                                            },
-                                            child: const Text(
-                                              "Sign Up",
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      GoogleSignInBtn,
-                                      const SizedBox(
-                                        height: 35,
-                                      ),
-                                    ],
-                                  )),
-                            )),
-                            SingleChildScrollView(
-                                child: Material(
-                              child: Form(
-                                  key: _formkey,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text(
-                                        "Teacher's Portal",
-                                        style: TextStyle(
-                                            fontSize: 25.0,
-                                            fontWeight: FontWeight.w300),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      emailfield,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      passwordfield,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      loginButton,
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          const Text(
-                                            "Don't have a account ? ",
-                                            style: TextStyle(fontSize: 18.0),
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const SignUp()));
-                                            },
-                                            child: const Text(
-                                              "Sign Up",
-                                              style: TextStyle(
-                                                  fontSize: 20.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.blue),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      GoogleSignInBtn
-                                    ],
-                                  )),
-                            )),
+                            SingleChildScrollView(child: StudentForm()),
+                            SingleChildScrollView(child: AdminForm()),
                           ],
                         ))
                       ],
@@ -368,20 +130,5 @@ class _LoginScreenState extends State<LoginScreen>
         ]),
       ),
     );
-  }
-
-  // ignore: non_constant_identifier_names
-  void Signin(String email, String password) async {
-    if (_formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        Fluttertoast.showToast(msg: "Login Successful");
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const MyStatefulWidget()));
-      }).catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
   }
 }
