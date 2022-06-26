@@ -41,12 +41,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 bottom: MediaQuery.of(context).size.width * 0.1),
             child: Column(children: <Widget>[
               Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child:
-                    Image.network(FirebaseAuth.instance.currentUser!.photoURL!),
-              ),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: CircleAvatar(
+                    radius: MediaQuery.of(context).size.width * 0.1,
+                    backgroundImage: NetworkImage(
+                        FirebaseAuth.instance.currentUser!.photoURL!),
+                  )),
               const SizedBox(
                 height: 20,
               ),

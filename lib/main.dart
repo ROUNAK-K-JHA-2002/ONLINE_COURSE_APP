@@ -38,9 +38,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const LoginScreen(),
-        '/home': (context) => const MyStatefulWidget(),
-        '/Uploadpage' :(context) => const UploadsPage(),
+        '/': (context) => const LoginScreen(
+              title: '',
+            ),
+        '/home': (context) => const HomePage(),
+        '/Uploadpage': (context) => const UploadsPage(),
       },
     );
   }

@@ -1,18 +1,11 @@
 // ignore: file_names
-import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/RoleBasedForm/AdminForm.dart';
-import 'package:eduapp/Screens/HomePage.dart';
-import 'package:eduapp/Screens/bottom_navbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Sign_Up_Screen.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../RoleBasedForm/AdminForm.dart';
 import '../RoleBasedForm/StudentForm.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key, required String title}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

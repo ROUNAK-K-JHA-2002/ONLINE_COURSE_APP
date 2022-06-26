@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/HomePage.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeGsign.dart';
 import 'package:eduapp/Screens/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +132,10 @@ class _StudentFormState extends State<StudentForm>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pushNamed(context, '/Uploadpage');
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const StudentPageGsign()));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));
@@ -205,7 +210,7 @@ class _StudentFormState extends State<StudentForm>
           .then((value) {
         Fluttertoast.showToast(msg: "Login Successful");
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const MyStatefulWidget()));
+            MaterialPageRoute(builder: (context) => const StudentPageEsign()));
       }).catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });

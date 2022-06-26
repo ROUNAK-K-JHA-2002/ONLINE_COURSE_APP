@@ -1,6 +1,8 @@
 // ignore: file_names
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/HomePage.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeEsign.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeGsign.dart';
 import 'package:eduapp/Screens/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +130,10 @@ class _AdminFormState extends State<AdminForm>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => const AdminPageGsign())));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));
@@ -203,7 +208,7 @@ class _AdminFormState extends State<AdminForm>
           .then((value) {
         Fluttertoast.showToast(msg: "Login Successful");
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const MyStatefulWidget()));
+            MaterialPageRoute(builder: (context) => const AdminPageEsign()));
       }).catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });

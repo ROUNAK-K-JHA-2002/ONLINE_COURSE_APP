@@ -7,21 +7,20 @@ import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../modals/User_Modal.dart';
-import '../subject_Pages/PhysicsPage.dart';
-import '../subject_Pages/MathsPage.dart';
-import '../subject_Pages/ChemistryPage.dart';
-import '../subject_Pages/LifeSciPage.dart';
+import '../../subject_Pages/ChemistryPage.dart';
+import '../../subject_Pages/LifeSciPage.dart';
+import '../../subject_Pages/MathsPage.dart';
+import '../../subject_Pages/PhysicsPage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AdminPageEsign extends StatefulWidget {
+  const AdminPageEsign({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AdminPageEsign> createState() => _AdminPageEsignState();
 }
 
 // ignore: camel_case_types
-class _HomePageState extends State<HomePage> {
+class _AdminPageEsignState extends State<AdminPageEsign> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -34,18 +33,28 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: const BoxDecoration(color: Colors.amber),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(235, 220, 1, 232),
+                    Color.fromARGB(255, 5, 117, 252),
+                  ],
+                ),
+              ),
               padding: EdgeInsets.zero,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                         child: UserAccountsDrawerHeader(
-                      decoration: const BoxDecoration(color: Colors.amber),
-                      currentAccountPicture: CircleAvatar(
-                        radius: MediaQuery.of(context).size.width * 0.1,
-                        backgroundImage: NetworkImage(
-                            FirebaseAuth.instance.currentUser!.photoURL!),
+                      decoration:
+                          const BoxDecoration(color: Colors.transparent),
+                      currentAccountPicture: const Icon(
+                        Icons.account_circle,
+                        size: 80,
+                        color: Colors.blue,
                       ),
                       accountName: Text(
                           "${FirebaseAuth.instance.currentUser!.displayName}"),
