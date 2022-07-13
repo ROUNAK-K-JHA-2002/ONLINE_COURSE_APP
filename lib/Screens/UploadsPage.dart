@@ -23,7 +23,7 @@ class _UploadsPageState extends State<UploadsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pdf"),
+        title: const Text("Upload Materials"),
         centerTitle: true,
       ),
       body: Container(

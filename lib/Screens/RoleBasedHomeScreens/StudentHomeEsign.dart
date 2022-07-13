@@ -11,7 +11,7 @@ import '../../subject_Pages/ChemistryPage.dart';
 import '../../subject_Pages/LifeSciPage.dart';
 import '../../subject_Pages/MathsPage.dart';
 import '../../subject_Pages/PhysicsPage.dart';
-import '../../modals/User_Modal.dart';
+import '../../models/User_Model.dart';
 
 class StudentPageEsign extends StatefulWidget {
   const StudentPageEsign({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                       ),
                       accountName: Text(
                         "${FirebaseAuth.instance.currentUser!.displayName}",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       accountEmail:
                           Text("${FirebaseAuth.instance.currentUser!.email}"),
@@ -112,8 +112,8 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromARGB(255, 170, 0, 255),
-                    Color.fromARGB(245, 23, 2, 255),
+                    Color.fromARGB(255, 195, 1, 195),
+                    Color.fromARGB(245, 57, 40, 245),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(35.0),
@@ -139,16 +139,16 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                           horizontal: MediaQuery.of(context).size.width * 0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
+                          const Text("Hello,",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30.0,
+                              )),
                           Text(
-                            "Hello,",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 35.0),
-                          ),
-                          Text(
-                            "Good Evening",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25.0),
+                            "${FirebaseAuth.instance.currentUser!.email}",
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 25.0),
                           ),
                         ],
                       ),
@@ -315,8 +315,9 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MathsPage()));
+                                        builder: (context) => const MathsPage(
+                                              title: 'Mathematics',
+                                            )));
                               },
                             ),
                           ),
@@ -381,8 +382,9 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PhysicsPage()));
+                                      builder: (context) => const PhysicsPage(
+                                            title: "Physics",
+                                          )));
                             }),
                           ))
                         ],
@@ -450,8 +452,9 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ChemistryPage()));
+                                      builder: (context) => const ChemistryPage(
+                                            title: "Chemistry",
+                                          )));
                             },
                           )),
                           Expanded(
@@ -515,7 +518,9 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LifeSciencePage()));
+                                              const LifeSciencePage(
+                                                title: "Life Science",
+                                              )));
                                 },
                               ),
                             ),

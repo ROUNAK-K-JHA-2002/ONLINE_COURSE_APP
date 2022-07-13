@@ -1,11 +1,15 @@
 import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/test.dart';
+import 'package:eduapp/subject_Pages/ChemistryPage.dart';
+import 'package:eduapp/subject_Pages/PhysicsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Screens/bottom_navbar.dart';
 import 'Screens/loginScreen.dart';
+import 'subject_Pages/LifeSciPage.dart';
+import 'subject_Pages/MathsPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

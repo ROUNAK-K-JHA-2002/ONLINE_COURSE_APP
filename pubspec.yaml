@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.2.1
   cloud_firestore: ^3.1.15
   cupertino_icons: ^1.0.2
   file_picker: ^4.6.1
@@ -35,10 +36,12 @@ dependencies:
   firebase_storage: ^10.2.18
   flutter:
     sdk: flutter
+  flutter_secure_storage: ^5.0.2
   fluttertoast: ^8.0.9
   google_fonts: ^3.0.1
   google_sign_in: ^5.3.3
   percent_indicator: ^4.2.2
+  
   syncfusion_flutter_pdfviewer: ^20.1.60-beta
   youtube_player_flutter: ^8.1.0
   youtube_player_iframe: ^2.3.0

@@ -142,14 +142,14 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                           horizontal: MediaQuery.of(context).size.width * 0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Hello,",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 35.0),
                           ),
                           Text(
-                            "Good Evening",
+                            "${FirebaseAuth.instance.currentUser!.displayName}",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 25.0),
                           ),
@@ -318,8 +318,9 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MathsPage()));
+                                        builder: (context) => const MathsPage(
+                                              title: 'Mathematics',
+                                            )));
                               },
                             ),
                           ),
@@ -384,8 +385,9 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PhysicsPage()));
+                                      builder: (context) => const PhysicsPage(
+                                            title: "Physics",
+                                          )));
                             }),
                           ))
                         ],
@@ -453,8 +455,9 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ChemistryPage()));
+                                      builder: (context) => const ChemistryPage(
+                                            title: "Chemistry",
+                                          )));
                             },
                           )),
                           Expanded(
@@ -518,7 +521,9 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LifeSciencePage()));
+                                              const LifeSciencePage(
+                                                title: "Life Science",
+                                              )));
                                 },
                               ),
                             ),

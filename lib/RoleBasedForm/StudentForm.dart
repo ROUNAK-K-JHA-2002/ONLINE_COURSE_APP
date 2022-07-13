@@ -4,6 +4,7 @@ import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeGsign.dart';
 import 'package:eduapp/Screens/bottom_navbar.dart';
+import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Screens/Sign_Up_Screen.dart';

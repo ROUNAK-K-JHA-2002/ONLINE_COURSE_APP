@@ -7,7 +7,7 @@ import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../modals/User_Modal.dart';
+import '../models/User_Model.dart';
 import '../subject_Pages/PhysicsPage.dart';
 import '../subject_Pages/MathsPage.dart';
 import '../subject_Pages/ChemistryPage.dart';
@@ -309,8 +309,9 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MathsPage()));
+                                        builder: (context) => const MathsPage(
+                                              title: 'Mathematics',
+                                            )));
                               },
                             ),
                           ),
@@ -375,8 +376,9 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PhysicsPage()));
+                                      builder: (context) => const PhysicsPage(
+                                            title: "Physics",
+                                          )));
                             }),
                           ))
                         ],
@@ -444,8 +446,9 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ChemistryPage()));
+                                      builder: (context) => const ChemistryPage(
+                                            title: "Chemistry",
+                                          )));
                             },
                           )),
                           Expanded(
@@ -509,7 +512,9 @@ class _HomePageState extends State<HomePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LifeSciencePage()));
+                                              const LifeSciencePage(
+                                                title: "Life Science",
+                                              )));
                                 },
                               ),
                             ),
