@@ -2,6 +2,7 @@
 
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
+import 'package:eduapp/Screens/UploadComponents.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,7 +63,8 @@ class _HomePageState extends State<HomePage> {
               leading: const Icon(Icons.upload_rounded),
               title: const Text("Upload Materials"),
               onTap: () {
-                Navigator.pushNamed(context, '/Uploadpage');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => const Upload())));
               },
             ),
             const ListTile(
@@ -201,6 +203,7 @@ class _HomePageState extends State<HomePage> {
                           child: TextField(
                             cursorColor: Color.fromARGB(213, 101, 30, 255),
                             decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.search),
                                 fillColor: Color.fromARGB(255, 255, 252, 252),
                                 filled: true,
                                 border: InputBorder.none,

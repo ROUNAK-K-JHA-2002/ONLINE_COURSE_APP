@@ -257,75 +257,68 @@ class _MathsPageState extends State<MathsPage> {
                 Expanded(
                     child: TabBarView(
                   children: [
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: videosList.length,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                final _newCode = videosList[index].youtubeId;
-                                _ytbPlayerController.load(_newCode);
-                                _ytbPlayerController.stop();
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.blue.shade100,
-                                    borderRadius: BorderRadius.circular(15)),
-                                margin: EdgeInsets.symmetric(
-                                    vertical:
-                                        MediaQuery.of(context).size.width *
-                                            0.015,
-                                    horizontal:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
-                                padding: EdgeInsets.symmetric(
-                                    vertical:
-                                        MediaQuery.of(context).size.width *
-                                            0.05,
-                                    horizontal:
-                                        MediaQuery.of(context).size.width *
-                                            0.02),
-                                child: ClipRRect(
-                                  child: Row(children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.02),
-                                      child: const Icon(
-                                        Icons.play_circle_fill_rounded,
-                                        size: 40.0,
-                                        color: Colors.deepPurpleAccent,
+                    ListView.builder(
+                        itemCount: videosList.length,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              final _newCode = videosList[index].youtubeId;
+                              _ytbPlayerController.load(_newCode);
+                              _ytbPlayerController.stop();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade100,
+                                  borderRadius: BorderRadius.circular(15)),
+                              margin: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.015,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.02),
+                              padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.05,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.02),
+                              child: ClipRRect(
+                                child: Row(children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal:
+                                            MediaQuery.of(context).size.width *
+                                                0.02),
+                                    child: const Icon(
+                                      Icons.play_circle_fill_rounded,
+                                      size: 40.0,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Text(
+                                        "${VideoTitle[index]}",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "${VideoTitle[index]}",
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                      Text(
+                                        "${CourseTime[index]}",
+                                        textAlign: TextAlign.start,
+                                        style: const TextStyle(
+                                          fontSize: 17.0,
+                                          fontWeight: FontWeight.w400,
                                         ),
-                                        Text(
-                                          "${CourseTime[index]}",
-                                          textAlign: TextAlign.start,
-                                          style: const TextStyle(
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                                ),
+                                      ),
+                                    ],
+                                  ),
+                                ]),
                               ),
-                            );
-                          }),
-                    ),
+                            ),
+                          );
+                        }),
                     Container(
                       padding: EdgeInsets.all(
                           MediaQuery.of(context).size.width * 0.03),

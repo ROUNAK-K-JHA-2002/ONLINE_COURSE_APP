@@ -3,6 +3,7 @@ import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/test.dart';
 import 'package:eduapp/subject_Pages/ChemistryPage.dart';
 import 'package:eduapp/subject_Pages/PhysicsPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
               title: '',
             ),
         '/home': (context) => const HomePage(),
-        '/Uploadpage': (context) => const UploadsPage(),
+        // '/Uploadpage': (context) => const UploadsPage(),
       },
     );
   }

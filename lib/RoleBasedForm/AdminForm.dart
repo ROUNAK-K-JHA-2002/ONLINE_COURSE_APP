@@ -4,6 +4,7 @@ import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeEsign.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeGsign.dart';
 import 'package:eduapp/Screens/bottom_navbar.dart';
+import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Screens/Sign_Up_Screen.dart';
@@ -201,7 +202,7 @@ class _AdminFormState extends State<AdminForm>
   }
 
   // ignore: non_constant_identifier_names
-  void Signin(String email, String password) async {
+  Signin(String email, String password) async {
     if (_formkeyForAdmin.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
@@ -213,5 +214,6 @@ class _AdminFormState extends State<AdminForm>
         Fluttertoast.showToast(msg: e!.message);
       });
     }
+    return "AdminEsign";
   }
 }

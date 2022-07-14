@@ -1,84 +1,148 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+
 import 'dart:io';
+import 'package:expandable/expandable.dart';
 import 'package:path/path.dart' as Path;
 import 'package:eduapp/FirebaseApi/firebaseApi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
-class UploadsPage extends StatefulWidget {
-  const UploadsPage({Key? key}) : super(key: key);
+class UploadPage extends StatefulWidget {
+  const UploadPage({Key? key}) : super(key: key);
 
   @override
-  _UploadsPageState createState() => _UploadsPageState();
+  State<UploadPage> createState() => _UploadPageState();
 }
 
-class _UploadsPageState extends State<UploadsPage> {
+class _UploadPageState extends State<UploadPage> {
   UploadTask? task;
   File? file;
 
   @override
+  // ignore: duplicate_ignore
   Widget build(BuildContext context) {
     final fileName =
         file != null ? Path.basename(file!.path) : 'No File Selected';
 
+    // ignore: non_constant_identifier_names
+    List Subjects = ["Maths", "Chemistry", "Physics", "Life_Science"];
+    List Colours = [
+      Colors.yellow,
+      Colors.orange,
+      Colors.blueAccent,
+      Colors.red
+    ];
+    List ImageLinks = ["Maths.jpg", "Chemistry.jpg", "physics.jpg", "cell.jpg"];
+
     return Scaffold(
       appBar: AppBar(
+        elevation: 4,
         title: const Text("Upload Materials"),
-        centerTitle: true,
       ),
       body: Container(
-        padding: const EdgeInsets.all(32),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Material(
-                elevation: 5,
-                color: const Color.fromARGB(255, 83, 14, 243),
-                borderRadius: BorderRadius.circular(10.0),
-                child: MaterialButton(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-                  minWidth: MediaQuery.of(context).size.width,
-                  child: const Text(
-                    "Select",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20.0,
-                        color: Colors.white),
-                  ),
-                  onPressed: () => selectFile(),
+        child: ListView.builder(
+          itemCount: Subjects.length,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return ExpandableNotifier(
+                child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colours[index],
+              ),
+              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
+              child: Column(children: [
+                Container(
+                  height: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage(
+                              'assets/images/${ImageLinks[index]}'))),
                 ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                fileName,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 48),
-              Material(
-                elevation: 5,
-                color: const Color.fromARGB(255, 83, 14, 243),
-                borderRadius: BorderRadius.circular(10.0),
-                child: MaterialButton(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-                  minWidth: MediaQuery.of(context).size.width,
-                  child: const Text(
-                    "Upload",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20.0,
-                        color: Colors.white),
-                  ),
-                  onPressed: () => uploadFile(),
-                ),
-              ),
-              const SizedBox(height: 20),
-              task != null ? buildUploadStatus(task!) : Container(),
-            ],
-          ),
+                ScrollOnExpand(
+                    child: ExpandablePanel(
+                        header: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "Upload ${Subjects[index]} Notes",
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 20),
+                          ),
+                        ),
+                        expanded: Container(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width * 0.05),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Material(
+                                elevation: 5,
+                                color: const Color.fromARGB(255, 83, 14, 243),
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: MaterialButton(
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: const Text(
+                                    "Select File",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20.0,
+                                        color: Colors.white),
+                                  ),
+                                  onPressed: () => selectFile(),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                fileName,
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(height: 15),
+                              Material(
+                                elevation: 5,
+                                color: const Color.fromARGB(255, 83, 14, 243),
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: MaterialButton(
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: const Text(
+                                    "Upload File",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20.0,
+                                        color: Colors.white),
+                                  ),
+                                  onPressed: () => uploadFile(index),
+                                ),
+                              ),
+                              task != null
+                                  ? buildUploadStatus(task!)
+                                  : Container(),
+                            ],
+                          ),
+                        ),
+                        collapsed: const Text("",
+                            softWrap: true,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.black)),
+                        builder: (_, collapsed, expanded) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10, right: 10, bottom: 10),
+                            child: Expandable(
+                              collapsed: collapsed,
+                              expanded: expanded,
+                              theme:
+                                  const ExpandableThemeData(crossFadePoint: 0),
+                            ),
+                          );
+                        }))
+              ]),
+            ));
+          },
         ),
       ),
     );
@@ -93,18 +157,41 @@ class _UploadsPageState extends State<UploadsPage> {
     setState(() => file = File(path));
   }
 
-  Future uploadFile() async {
+  Future uploadFile(index) async {
+    List Subjects = ["Maths", "Chemistry", "Physics", "Life_Science"];
     if (file == null) return;
 
     final fileName = Path.basename(file!.path);
-    final destination = 'Chemistry/$fileName';
+    final destination = '${Subjects[index]}/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});
 
     if (task == null) return;
 
-    final snapshot = await task!.whenComplete(() {});
+    final snapshot = await task!.whenComplete(() {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text("Alert!"),
+          content: const Text("File Uploaded Succefully."),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const UploadPage())));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(14),
+                child: const Text("Done"),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
     final urlDownload = await snapshot.ref.getDownloadURL();
 
     print('Download-Link: $urlDownload');

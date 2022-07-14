@@ -1,7 +1,10 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
+import 'package:eduapp/Screens/UploadComponents.dart';
+import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -68,10 +71,13 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
               title: const Text("Home"),
             ),
             ListTile(
-              leading: Icon(Icons.upload_rounded),
+              leading: const Icon(Icons.upload_rounded),
               title: const Text("Upload Materials"),
               onTap: () {
-                Navigator.pushNamed(context, '/Uploadpage');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const UploadPage())));
               },
             ),
             const ListTile(
@@ -150,8 +156,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                           ),
                           Text(
                             "${FirebaseAuth.instance.currentUser!.displayName}",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25.0),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 25.0),
                           ),
                         ],
                       ),
@@ -183,9 +189,6 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                   ],
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(14.0)),
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.1,
                       left: MediaQuery.of(context).size.width * 0.1,
@@ -193,44 +196,22 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          )),
-                      const Expanded(
-                          flex: 3,
                           child: TextField(
-                            cursorColor: Color.fromARGB(213, 101, 30, 255),
-                            decoration: InputDecoration(
-                                fillColor: Color.fromARGB(255, 255, 252, 252),
-                                filled: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 15),
-                                hintText: 'Search ...',
-                                hintStyle: TextStyle(color: Colors.deepPurple)),
-                          )),
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.mic,
-                              color: Colors.deepPurple,
-                              size: 33.0,
+                        cursorColor: const Color.fromARGB(213, 101, 30, 255),
+                        decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search_rounded),
+                            suffixIcon: const Icon(Icons.mic),
+                            fillColor: const Color.fromARGB(255, 255, 252, 252),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ))
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            hintText: 'Search ...',
+                            hintStyle:
+                                const TextStyle(color: Colors.deepPurple)),
+                      ))
                     ],
                   ),
                 )
@@ -243,11 +224,13 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                 Container(
                   margin: EdgeInsets.symmetric(
                       vertical: MediaQuery.of(context).size.width * 0.05),
-                  child: const Text(
+                  child: const AutoSizeText(
                     "Explore",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    maxFontSize: 30.0,
                   ),
                 ),
                 Expanded(
