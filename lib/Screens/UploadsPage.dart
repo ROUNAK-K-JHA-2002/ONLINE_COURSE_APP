@@ -39,8 +39,11 @@ class _UploadPageState extends State<UploadPage> {
       appBar: AppBar(
         elevation: 4,
         title: const Text("Upload Materials"),
+        backgroundColor: Colors.deepPurpleAccent,
+        centerTitle: true,
       ),
       body: Container(
+        color: Colors.lime.shade100,
         child: ListView.builder(
           itemCount: Subjects.length,
           physics: const AlwaysScrollableScrollPhysics(),
@@ -69,7 +72,9 @@ class _UploadPageState extends State<UploadPage> {
                           child: Text(
                             "Upload ${Subjects[index]} Notes",
                             style: const TextStyle(
-                                color: Colors.black, fontSize: 20),
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                         expanded: Container(
@@ -178,7 +183,8 @@ class _UploadPageState extends State<UploadPage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.of(context).pop();
+                Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                         builder: ((context) => const UploadPage())));

@@ -1,9 +1,8 @@
 // ignore: file_names
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
-import 'package:eduapp/Screens/HomePage.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeGsign.dart';
-import 'package:eduapp/Screens/bottom_navbar.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -125,18 +124,17 @@ class _StudentFormState extends State<StudentForm>
                   )),
               const Expanded(
                   flex: 2,
-                  child: Text(
+                  child: AutoSizeText(
                     "Sign In With google",
-                    style: TextStyle(fontSize: 21.0),
+                    style: TextStyle(fontSize: 22.0),
+                    maxLines: 1,
                   ))
             ],
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const StudentPageGsign()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => StudentPageGsign()));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));
@@ -151,9 +149,10 @@ class _StudentFormState extends State<StudentForm>
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              const AutoSizeText(
                 "Student's Portal",
                 style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w300),
+                maxLines: 1,
               ),
               const SizedBox(
                 height: 10,
@@ -173,9 +172,10 @@ class _StudentFormState extends State<StudentForm>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
+                  const AutoSizeText(
                     "Don't have a account ? ",
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 19.0),
+                    maxLines: 1,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -184,12 +184,13 @@ class _StudentFormState extends State<StudentForm>
                           MaterialPageRoute(
                               builder: (context) => const SignUp()));
                     },
-                    child: const Text(
+                    child: const AutoSizeText(
                       "Sign Up",
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 21.0,
                           fontWeight: FontWeight.w600,
                           color: Colors.blue),
+                      maxLines: 1,
                     ),
                   )
                 ],

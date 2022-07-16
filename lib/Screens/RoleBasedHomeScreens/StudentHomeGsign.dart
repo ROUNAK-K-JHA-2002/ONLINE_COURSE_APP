@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
@@ -12,9 +13,8 @@ import '../../subject_Pages/LifeSciPage.dart';
 import '../../subject_Pages/MathsPage.dart';
 import '../../subject_Pages/PhysicsPage.dart';
 
+// ignore: must_be_immutable
 class StudentPageGsign extends StatefulWidget {
-  const StudentPageGsign({Key? key}) : super(key: key);
-
   @override
   State<StudentPageGsign> createState() => _StudentPageGsignState();
 }
@@ -22,6 +22,7 @@ class StudentPageGsign extends StatefulWidget {
 // ignore: camel_case_types
 class _StudentPageGsignState extends State<StudentPageGsign> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,24 +57,30 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                         backgroundImage: NetworkImage(
                             FirebaseAuth.instance.currentUser!.photoURL!),
                       ),
-                      accountName: Text(
-                          "${FirebaseAuth.instance.currentUser!.displayName}"),
-                      accountEmail:
-                          Text("${FirebaseAuth.instance.currentUser!.email}"),
+                      accountName: AutoSizeText(
+                        "${FirebaseAuth.instance.currentUser!.displayName}",
+                        style: TextStyle(fontSize: 18.0),
+                        maxLines: 1,
+                      ),
+                      accountEmail: AutoSizeText(
+                        "${FirebaseAuth.instance.currentUser!.email}",
+                        style: TextStyle(fontSize: 15.0),
+                        maxLines: 1,
+                      ),
                     ))
                   ]),
             ),
             const ListTile(
               leading: const Icon(Icons.home),
-              title: const Text("Home"),
+              title: const AutoSizeText("Home"),
             ),
             const ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: Text("Download Notes"),
+              title: AutoSizeText("Download Notes"),
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
-              title: const Text("Profile"),
+              title: const AutoSizeText("Profile"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -83,16 +90,16 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
             ),
             ListTile(
               leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
+              title: const AutoSizeText("Logout"),
               onTap: () async {
                 await FirebaseServices().signOut();
-                Navigator.pushNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/');
                 Fluttertoast.showToast(msg: "LogOut Sucessful");
               },
             ),
             const ListTile(
               leading: const Icon(Icons.question_mark_rounded),
-              title: Text("About App"),
+              title: AutoSizeText("About App"),
             ),
           ],
         ),
@@ -136,15 +143,16 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          const AutoSizeText(
                             "Hello,",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 35.0),
+                                TextStyle(color: Colors.white, fontSize: 30.0),
                           ),
-                          Text(
-                            "${FirebaseAuth.instance.currentUser!.email}",
+                          AutoSizeText(
+                            "${FirebaseAuth.instance.currentUser!.displayName}",
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 25.0),
+                                color: Colors.white, fontSize: 22.0),
+                            maxLines: 1,
                           ),
                         ],
                       ),
@@ -236,7 +244,7 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                 Container(
                   margin: EdgeInsets.symmetric(
                       vertical: MediaQuery.of(context).size.width * 0.05),
-                  child: const Text(
+                  child: const AutoSizeText(
                     "Explore",
                     textAlign: TextAlign.center,
                     style:
@@ -288,21 +296,23 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                                       .size
                                                       .height *
                                                   0.02),
-                                          child: const Text(
+                                          child: const AutoSizeText(
                                             "MATHEMATICS",
                                             style: TextStyle(
                                                 fontSize: 22.0,
                                                 fontWeight: FontWeight.w400),
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),
                                       const Expanded(
                                         flex: 1,
-                                        child: Text(
+                                        child: AutoSizeText(
                                           "20 Courses",
                                           style: TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w300),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ],
@@ -355,21 +365,23 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "PHYSICS",
                                           style: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
@@ -425,21 +437,23 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "CHEMISTRY",
                                           style: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
@@ -490,21 +504,23 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "LIFE SCIENCE",
                                           style: TextStyle(
                                               fontSize: 23.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],

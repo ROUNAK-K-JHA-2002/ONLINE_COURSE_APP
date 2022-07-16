@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/RoleBasedForm/AdminForm.dart';
 import 'package:flutter/material.dart';
 import '../RoleBasedForm/AdminForm.dart';
@@ -40,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen>
           Container(
             margin: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.width * 0.03),
-            child: const Text(
+            child: const AutoSizeText(
               "Welcome",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -48,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen>
                 decoration: TextDecoration.none,
                 color: Color.fromARGB(255, 245, 243, 243),
               ),
+              maxLines: 1,
             ),
           ),
           Expanded(

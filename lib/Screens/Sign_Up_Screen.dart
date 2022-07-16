@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eduapp/Screens/HomePage.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -307,7 +307,7 @@ class _SignUpState extends State<SignUp> {
         .set(userModal.toMap());
 
     Fluttertoast.showToast(msg: "Account Created succesfully");
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const StudentPageEsign()));
   }
 }

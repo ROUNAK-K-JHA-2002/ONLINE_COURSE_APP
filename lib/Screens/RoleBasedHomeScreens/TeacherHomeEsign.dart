@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
@@ -11,6 +12,8 @@ import '../../subject_Pages/ChemistryPage.dart';
 import '../../subject_Pages/LifeSciPage.dart';
 import '../../subject_Pages/MathsPage.dart';
 import '../../subject_Pages/PhysicsPage.dart';
+import '../../models/User_Model.dart';
+import '../UploadsPage.dart';
 
 class AdminPageEsign extends StatefulWidget {
   const AdminPageEsign({Key? key}) : super(key: key);
@@ -22,9 +25,8 @@ class AdminPageEsign extends StatefulWidget {
 // ignore: camel_case_types
 class _AdminPageEsignState extends State<AdminPageEsign> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  @override
 
-  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
@@ -56,33 +58,42 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                       currentAccountPicture: const Icon(
                         Icons.account_circle,
                         size: 80,
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 240, 244, 248),
                       ),
-                      accountName: Text(
-                          "${FirebaseAuth.instance.currentUser!.displayName}"),
-                      accountEmail:
-                          Text("${FirebaseAuth.instance.currentUser!.email}"),
+                      accountName: AutoSizeText(
+                        "${FirebaseAuth.instance.currentUser!.displayName}",
+                        style: TextStyle(fontSize: 18.0),
+                        maxLines: 1,
+                      ),
+                      accountEmail: Text(
+                        "${FirebaseAuth.instance.currentUser!.email}",
+                        style: TextStyle(fontSize: 18.0),
+                        maxLines: 1,
+                      ),
                     ))
                   ]),
             ),
             const ListTile(
               leading: const Icon(Icons.home),
-              title: const Text("Home"),
+              title: const AutoSizeText("Home"),
             ),
             ListTile(
               leading: const Icon(Icons.upload_rounded),
               title: const Text("Upload Materials"),
               onTap: () {
-                Navigator.pushNamed(context, '/Uploadpage');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const UploadPage())));
               },
             ),
             const ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: Text("Download Notes"),
+              title: AutoSizeText("Download Notes"),
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
-              title: const Text("Profile"),
+              title: const AutoSizeText("Profile"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -92,7 +103,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
             ),
             ListTile(
               leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
+              title: const AutoSizeText("Logout"),
               onTap: () async {
                 await FirebaseServices().signOut();
                 Navigator.pushNamed(context, '/');
@@ -101,7 +112,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
             ),
             const ListTile(
               leading: const Icon(Icons.question_mark_rounded),
-              title: Text("About App"),
+              title: AutoSizeText("About App"),
             ),
           ],
         ),
@@ -117,8 +128,8 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromARGB(255, 200, 0, 255),
-                    Color.fromARGB(245, 23, 2, 255),
+                    Color.fromARGB(255, 195, 1, 195),
+                    Color.fromARGB(245, 57, 40, 245),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(35.0),
@@ -145,15 +156,19 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          const AutoSizeText(
                             "Hello,",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 35.0),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25.0,
+                            ),
+                            maxLines: 1,
                           ),
-                          Text(
+                          AutoSizeText(
                             "${FirebaseAuth.instance.currentUser!.email}",
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 25.0),
+                                color: Colors.white, fontSize: 22.0),
+                            maxLines: 1,
                           ),
                         ],
                       ),
@@ -185,9 +200,6 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   ],
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(14.0)),
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.1,
                       left: MediaQuery.of(context).size.width * 0.1,
@@ -195,44 +207,25 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          )),
-                      const Expanded(
                           flex: 3,
                           child: TextField(
-                            cursorColor: Color.fromARGB(213, 101, 30, 255),
+                            cursorColor:
+                                const Color.fromARGB(213, 101, 30, 255),
                             decoration: InputDecoration(
-                                fillColor: Color.fromARGB(255, 255, 252, 252),
+                                prefixIcon: const Icon(Icons.search_rounded),
+                                suffixIcon: const Icon(Icons.mic),
+                                fillColor:
+                                    const Color.fromARGB(255, 255, 252, 252),
                                 filled: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 15),
                                 hintText: 'Search ...',
-                                hintStyle: TextStyle(color: Colors.deepPurple)),
+                                hintStyle:
+                                    const TextStyle(color: Colors.deepPurple)),
                           )),
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.mic,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          ))
                     ],
                   ),
                 )
@@ -245,11 +238,12 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                 Container(
                   margin: EdgeInsets.symmetric(
                       vertical: MediaQuery.of(context).size.width * 0.05),
-                  child: const Text(
+                  child: const AutoSizeText(
                     "Explore",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                    maxLines: 1,
                   ),
                 ),
                 Expanded(
@@ -297,21 +291,23 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                                                       .size
                                                       .height *
                                                   0.02),
-                                          child: const Text(
+                                          child: const AutoSizeText(
                                             "MATHEMATICS",
                                             style: TextStyle(
                                                 fontSize: 22.0,
                                                 fontWeight: FontWeight.w400),
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),
                                       const Expanded(
                                         flex: 1,
-                                        child: Text(
+                                        child: AutoSizeText(
                                           "20 Courses",
                                           style: TextStyle(
                                               fontSize: 18.0,
                                               fontWeight: FontWeight.w300),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ],
@@ -364,21 +360,23 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "PHYSICS",
                                           style: TextStyle(
                                               fontSize: 25.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
@@ -434,21 +432,23 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "CHEMISTRY",
                                           style: TextStyle(
                                               fontSize: 25.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
@@ -499,21 +499,23 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "LIFE SCIENCE",
                                           style: TextStyle(
                                               fontSize: 23.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
+                                      child: AutoSizeText(
                                         "20 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
+                                        maxLines: 1,
                                       ),
                                     ),
                                   ],

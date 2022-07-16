@@ -1,18 +1,18 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
-import 'package:eduapp/Screens/UploadComponents.dart';
+import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../models/User_Model.dart';
-import '../subject_Pages/PhysicsPage.dart';
-import '../subject_Pages/MathsPage.dart';
-import '../subject_Pages/ChemistryPage.dart';
-import '../subject_Pages/LifeSciPage.dart';
+import '../../subject_Pages/ChemistryPage.dart';
+import '../../subject_Pages/LifeSciPage.dart';
+import '../../subject_Pages/MathsPage.dart';
+import '../../subject_Pages/PhysicsPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,45 +35,63 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: const BoxDecoration(color: Colors.amber),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(235, 220, 1, 232),
+                    Color.fromARGB(255, 5, 117, 252),
+                  ],
+                ),
+              ),
               padding: EdgeInsets.zero,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                         child: UserAccountsDrawerHeader(
-                      decoration: const BoxDecoration(color: Colors.amber),
+                      decoration:
+                          const BoxDecoration(color: Colors.transparent),
                       currentAccountPicture: CircleAvatar(
                         radius: MediaQuery.of(context).size.width * 0.1,
                         backgroundImage: NetworkImage(
                             FirebaseAuth.instance.currentUser!.photoURL!),
                       ),
-                      accountName: Text(
-                          "${FirebaseAuth.instance.currentUser!.displayName}"),
-                      accountEmail:
-                          Text("${FirebaseAuth.instance.currentUser!.email}"),
+                      accountName: AutoSizeText(
+                        "${FirebaseAuth.instance.currentUser!.displayName}",
+                        style: TextStyle(fontSize: 18.0),
+                        maxLines: 1,
+                      ),
+                      accountEmail: Text(
+                        "${FirebaseAuth.instance.currentUser!.email}",
+                        style: TextStyle(fontSize: 15.0),
+                        maxLines: 1,
+                      ),
                     ))
                   ]),
             ),
             const ListTile(
               leading: const Icon(Icons.home),
-              title: const Text("Home"),
+              title: const AutoSizeText("Home"),
             ),
             ListTile(
               leading: const Icon(Icons.upload_rounded),
-              title: const Text("Upload Materials"),
+              title: const AutoSizeText("Upload Materials"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => const Upload())));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const UploadPage())));
               },
             ),
             const ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: Text("Download Notes"),
+              title: AutoSizeText("Download Notes"),
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
-              title: const Text("Profile"),
+              title: const AutoSizeText("Profile"),
               onTap: () {
                 Navigator.push(
                     context,
@@ -83,16 +101,16 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
+              title: const AutoSizeText("Logout"),
               onTap: () async {
                 await FirebaseServices().signOut();
-                Navigator.pushNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/');
                 Fluttertoast.showToast(msg: "LogOut Sucessful");
               },
             ),
             const ListTile(
               leading: const Icon(Icons.question_mark_rounded),
-              title: Text("About App"),
+              title: AutoSizeText("About App"),
             ),
           ],
         ),
@@ -135,16 +153,18 @@ class _HomePageState extends State<HomePage> {
                           horizontal: MediaQuery.of(context).size.width * 0.08),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const AutoSizeText(
                             "Hello,",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 35.0),
+                                TextStyle(color: Colors.white, fontSize: 30.0),
+                            maxLines: 1,
                           ),
-                          Text(
-                            "Good Evening",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25.0),
+                          AutoSizeText(
+                            "${FirebaseAuth.instance.currentUser!.displayName}",
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 22.0),
+                            maxLines: 1,
                           ),
                         ],
                       ),
@@ -176,9 +196,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(14.0)),
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.1,
                       left: MediaQuery.of(context).size.width * 0.1,
@@ -186,45 +203,22 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          )),
-                      const Expanded(
-                          flex: 3,
                           child: TextField(
-                            cursorColor: Color.fromARGB(213, 101, 30, 255),
-                            decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.search),
-                                fillColor: Color.fromARGB(255, 255, 252, 252),
-                                filled: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 15),
-                                hintText: 'Search ...',
-                                hintStyle: TextStyle(color: Colors.deepPurple)),
-                          )),
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.mic,
-                              color: Colors.deepPurple,
-                              size: 33.0,
+                        cursorColor: const Color.fromARGB(213, 101, 30, 255),
+                        decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search_rounded),
+                            suffixIcon: const Icon(Icons.mic),
+                            fillColor: const Color.fromARGB(255, 255, 252, 252),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                          ))
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            hintText: 'Search ...',
+                            hintStyle:
+                                const TextStyle(color: Colors.deepPurple)),
+                      ))
                     ],
                   ),
                 )
@@ -237,11 +231,13 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   margin: EdgeInsets.symmetric(
                       vertical: MediaQuery.of(context).size.width * 0.05),
-                  child: const Text(
+                  child: const AutoSizeText(
                     "Explore",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    maxFontSize: 30.0,
                   ),
                 ),
                 Expanded(
@@ -289,17 +285,18 @@ class _HomePageState extends State<HomePage> {
                                                       .size
                                                       .height *
                                                   0.02),
-                                          child: const Text(
+                                          child: const AutoSizeText(
                                             "MATHEMATICS",
                                             style: TextStyle(
                                                 fontSize: 22.0,
                                                 fontWeight: FontWeight.w400),
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),
                                       const Expanded(
                                         flex: 1,
-                                        child: Text(
+                                        child: AutoSizeText(
                                           "20 Courses",
                                           style: TextStyle(
                                               fontSize: 18.0,
@@ -356,18 +353,19 @@ class _HomePageState extends State<HomePage> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "PHYSICS",
                                           style: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
-                                        "20 Courses",
+                                      child: AutoSizeText(
+                                        "14 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
@@ -426,18 +424,19 @@ class _HomePageState extends State<HomePage> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "CHEMISTRY",
                                           style: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
                                       child: Text(
-                                        "20 Courses",
+                                        "18 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
@@ -491,18 +490,19 @@ class _HomePageState extends State<HomePage> {
                                                     .size
                                                     .height *
                                                 0.02),
-                                        child: const Text(
+                                        child: const AutoSizeText(
                                           "LIFE SCIENCE",
                                           style: TextStyle(
-                                              fontSize: 23.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),
                                     const Expanded(
                                       flex: 1,
-                                      child: Text(
-                                        "20 Courses",
+                                      child: AutoSizeText(
+                                        "12 Courses",
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
