@@ -59,12 +59,12 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                       ),
                       accountName: AutoSizeText(
                         "${FirebaseAuth.instance.currentUser!.displayName}",
-                        style: TextStyle(fontSize: 18.0),
+                        style: const TextStyle(fontSize: 18.0),
                         maxLines: 1,
                       ),
                       accountEmail: AutoSizeText(
                         "${FirebaseAuth.instance.currentUser!.email}",
-                        style: TextStyle(fontSize: 15.0),
+                        style: const TextStyle(fontSize: 15.0),
                         maxLines: 1,
                       ),
                     ))
