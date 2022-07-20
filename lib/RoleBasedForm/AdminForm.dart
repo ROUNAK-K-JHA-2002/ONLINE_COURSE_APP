@@ -137,8 +137,8 @@ class _AdminFormState extends State<AdminForm>
             //     context,
             //     MaterialPageRoute(
             //         builder: ((context) => const AdminPageGsign())));
-            Navigator.pushReplacementNamed(context, '/AdminPageGsign',
-                arguments: {'flag': flag});
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => AdminPageGsign()));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));

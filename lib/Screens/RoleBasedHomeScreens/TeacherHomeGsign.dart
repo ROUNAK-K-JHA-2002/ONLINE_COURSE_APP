@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
+import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
@@ -30,6 +31,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
   Widget build(BuildContext context) {
     List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
     List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
+    List index = [0, 1, 2, 3];
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -37,7 +39,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
         width: MediaQuery.of(context).size.width * 0.65,
         child: ListView(
           padding: EdgeInsets.zero,
-          children: <Widget>[
+          children: [
             DrawerHeader(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -69,6 +71,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                     ))
                   ]),
             ),
+            // ignore: unused_local_variable
+
             const ListTile(
               leading: const Icon(Icons.home),
               title: const Text("Home"),
@@ -84,7 +88,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
               },
             ),
             const ListTile(
-              leading: const Icon(Icons.download_rounded),
+              leading: Icon(Icons.download_rounded),
               title: Text("Download Notes"),
             ),
             ListTile(
@@ -229,7 +233,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                       vertical: MediaQuery.of(context).size.width * 0.04),
                   child: const AutoSizeText(
                     "Explore",
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
                     maxLines: 1,
@@ -240,9 +244,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                     flex: 3,
                     child: SingleChildScrollView(
                       child: Wrap(
-                        children: Subjects.map((a) {
-                          var index = 0;
-
+                        children: index.map((a) {
                           return InkWell(
                             child: Container(
                                 height:
@@ -272,7 +274,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                             MediaQuery.of(context).size.width *
                                                 0.04),
                                         child: Image.asset(
-                                            'assets/images/physics.png'),
+                                            'assets/images/${Sub_photo[a]}.png'),
                                       ),
                                     ),
                                     Expanded(
@@ -283,7 +285,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                                     .height *
                                                 0.02),
                                         child: AutoSizeText(
-                                          a,
+                                          "${Subjects[a]}",
                                           style: const TextStyle(
                                               fontSize: 25.0,
                                               fontWeight: FontWeight.w400),
@@ -294,7 +296,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                     Expanded(
                                       flex: 1,
                                       child: Text(
-                                        Subjects[index],
+                                        "${Subjects[a]}",
                                         style: const TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),

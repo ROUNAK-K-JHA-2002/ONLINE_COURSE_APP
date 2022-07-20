@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
+import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
@@ -74,9 +75,13 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
               leading: const Icon(Icons.home),
               title: const AutoSizeText("Home"),
             ),
-            const ListTile(
+            ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: AutoSizeText("Download Notes"),
+              title: const AutoSizeText("Download Notes"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => testing())));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
@@ -184,9 +189,6 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                   ],
                 ),
                 Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 3, color: Colors.white),
-                      borderRadius: BorderRadius.circular(14.0)),
                   margin: EdgeInsets.only(
                       top: MediaQuery.of(context).size.width * 0.1,
                       left: MediaQuery.of(context).size.width * 0.1,
@@ -194,44 +196,25 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.search,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          )),
-                      const Expanded(
                           flex: 3,
                           child: TextField(
-                            cursorColor: Color.fromARGB(213, 101, 30, 255),
+                            cursorColor:
+                                const Color.fromARGB(213, 101, 30, 255),
                             decoration: InputDecoration(
-                                fillColor: Color.fromARGB(255, 255, 252, 252),
+                                prefixIcon: const Icon(Icons.search_rounded),
+                                suffixIcon: const Icon(Icons.mic),
+                                fillColor:
+                                    const Color.fromARGB(255, 255, 252, 252),
                                 filled: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 15),
                                 hintText: 'Search ...',
-                                hintStyle: TextStyle(color: Colors.deepPurple)),
+                                hintStyle:
+                                    const TextStyle(color: Colors.deepPurple)),
                           )),
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                vertical:
-                                    MediaQuery.of(context).size.width * 0.0195),
-                            child: const Icon(
-                              Icons.mic,
-                              color: Colors.deepPurple,
-                              size: 33.0,
-                            ),
-                          ))
                     ],
                   ),
                 )

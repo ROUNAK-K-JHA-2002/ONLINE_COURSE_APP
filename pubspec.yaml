@@ -31,6 +31,8 @@ dependencies:
   cached_network_image: ^3.2.1
   cloud_firestore: ^3.1.15
   cupertino_icons: ^1.0.2
+  curved_navigation_bar: ^1.0.3
+  dio: ^4.0.6
   expandable: ^5.0.1
   file_picker: ^4.6.1
   firebase_auth: ^3.3.18
@@ -40,9 +42,12 @@ dependencies:
     sdk: flutter
   flutter_secure_storage: ^5.0.2
   fluttertoast: ^8.0.9
+  gallery_saver: ^2.3.2
   google_fonts: ^3.0.1
   google_sign_in: ^5.3.3
+  path_provider: ^2.0.11
   percent_indicator: ^4.2.2
+  permission_handler: ^9.2.0
   syncfusion_flutter_pdfviewer: ^20.1.60-beta
   youtube_player_flutter: ^8.1.0
   youtube_player_iframe: ^2.3.0

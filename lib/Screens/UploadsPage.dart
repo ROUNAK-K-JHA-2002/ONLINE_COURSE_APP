@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore
 
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:expandable/expandable.dart';
 import 'package:path/path.dart' as Path;
 import 'package:eduapp/FirebaseApi/firebaseApi.dart';
@@ -36,121 +37,157 @@ class _UploadPageState extends State<UploadPage> {
     List ImageLinks = ["Maths.jpg", "Chemistry.jpg", "physics.jpg", "cell.jpg"];
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 4,
-        title: const Text("Upload Materials"),
-        backgroundColor: Colors.deepPurpleAccent,
-        centerTitle: true,
-      ),
-      body: Container(
-        color: Colors.lime.shade100,
-        child: ListView.builder(
-          itemCount: Subjects.length,
-          physics: const AlwaysScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return ExpandableNotifier(
-                child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colours[index],
+        body: Column(
+      children: [
+        Container(
+            color: Color.fromARGB(255, 153, 43, 250),
+            width: MediaQuery.of(context).size.width * 1,
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.15,
+                bottom: MediaQuery.of(context).size.width * 0.04),
+            child: const Center(
+              child: AutoSizeText(
+                "Upload Materials",
+                style: TextStyle(fontSize: 25.0, color: Colors.white),
+                maxLines: 1,
               ),
-              margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
-              child: Column(children: [
-                Container(
-                  height: MediaQuery.of(context).size.width * 0.5,
+            )),
+        Expanded(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(236, 248, 237, 163),
+                  Color.fromARGB(245, 219, 119, 252),
+                  Color.fromARGB(245, 248, 127, 103),
+                ],
+              ),
+            ),
+            child: ListView.builder(
+              itemCount: Subjects.length,
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return ExpandableNotifier(
+                    child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                              'assets/images/${ImageLinks[index]}'))),
-                ),
-                ScrollOnExpand(
-                    child: ExpandablePanel(
-                        header: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            "Upload ${Subjects[index]} Notes",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        expanded: Container(
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.width * 0.05),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Material(
-                                elevation: 5,
-                                color: const Color.fromARGB(255, 83, 14, 243),
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: MaterialButton(
-                                  minWidth: MediaQuery.of(context).size.width,
-                                  child: const Text(
-                                    "Select File",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20.0,
-                                        color: Colors.white),
-                                  ),
-                                  onPressed: () => selectFile(),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                fileName,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 12, 217, 240),
+                        width: 0.5,
+                        style: BorderStyle.solid),
+                    color: Colours[index],
+                  ),
+                  margin:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
+                  child: Column(children: [
+                    Container(
+                      height: MediaQuery.of(context).size.width * 0.5,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 26, 21, 21),
+                              width: 0.5,
+                              style: BorderStyle.solid),
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                  'assets/images/${ImageLinks[index]}'))),
+                    ),
+                    ScrollOnExpand(
+                        child: ExpandablePanel(
+                            header: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                "Upload ${Subjects[index]} Notes",
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500),
                               ),
-                              const SizedBox(height: 15),
-                              Material(
-                                elevation: 5,
-                                color: const Color.fromARGB(255, 83, 14, 243),
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: MaterialButton(
-                                  minWidth: MediaQuery.of(context).size.width,
-                                  child: const Text(
-                                    "Upload File",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20.0,
-                                        color: Colors.white),
-                                  ),
-                                  onPressed: () => uploadFile(index),
-                                ),
-                              ),
-                              task != null
-                                  ? buildUploadStatus(task!)
-                                  : Container(),
-                            ],
-                          ),
-                        ),
-                        collapsed: const Text("",
-                            softWrap: true,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black)),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                              theme:
-                                  const ExpandableThemeData(crossFadePoint: 0),
                             ),
-                          );
-                        }))
-              ]),
-            ));
-          },
-        ),
-      ),
-    );
+                            expanded: Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.05),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Material(
+                                    elevation: 5,
+                                    color:
+                                        const Color.fromARGB(255, 83, 14, 243),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: MaterialButton(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width,
+                                      child: const Text(
+                                        "Select File",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20.0,
+                                            color: Colors.white),
+                                      ),
+                                      onPressed: () => selectFile(),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    fileName,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Material(
+                                    elevation: 5,
+                                    color:
+                                        const Color.fromARGB(255, 83, 14, 243),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: MaterialButton(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width,
+                                      child: const Text(
+                                        "Upload File",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20.0,
+                                            color: Colors.white),
+                                      ),
+                                      onPressed: () => uploadFile(index),
+                                    ),
+                                  ),
+                                  task != null
+                                      ? buildUploadStatus(task!)
+                                      : Container(),
+                                ],
+                              ),
+                            ),
+                            collapsed: const Text("",
+                                softWrap: true,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Colors.black)),
+                            builder: (_, collapsed, expanded) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 10),
+                                child: Expandable(
+                                  collapsed: collapsed,
+                                  expanded: expanded,
+                                  theme: const ExpandableThemeData(
+                                      crossFadePoint: 0),
+                                ),
+                              );
+                            }))
+                  ]),
+                ));
+              },
+            ),
+          ),
+        )
+      ],
+    ));
   }
 
   Future selectFile() async {

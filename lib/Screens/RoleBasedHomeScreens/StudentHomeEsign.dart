@@ -2,6 +2,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
+import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
@@ -76,9 +77,13 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
               leading: const Icon(Icons.home),
               title: const AutoSizeText("Home"),
             ),
-            const ListTile(
+            ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: AutoSizeText("Download Notes"),
+              title: const AutoSizeText("Download Notes"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => testing())));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),

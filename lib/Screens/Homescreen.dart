@@ -4,7 +4,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/UploadsPage.dart';
+import 'package:eduapp/Screens/bottomnavbar.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
+import 'package:eduapp/Screens/test.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,11 @@ import '../../subject_Pages/ChemistryPage.dart';
 import '../../subject_Pages/LifeSciPage.dart';
 import '../../subject_Pages/MathsPage.dart';
 import '../../subject_Pages/PhysicsPage.dart';
+import 'DownloadPage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String flag;
+  const HomePage(this.flag);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(235, 220, 1, 232),
+                    Color.fromARGB(235, 255, 5, 247),
                     Color.fromARGB(255, 5, 117, 252),
                   ],
                 ),
@@ -60,12 +64,12 @@ class _HomePageState extends State<HomePage> {
                       ),
                       accountName: AutoSizeText(
                         "${FirebaseAuth.instance.currentUser!.displayName}",
-                        style: TextStyle(fontSize: 18.0),
+                        style: const TextStyle(fontSize: 18.0),
                         maxLines: 1,
                       ),
                       accountEmail: Text(
                         "${FirebaseAuth.instance.currentUser!.email}",
-                        style: TextStyle(fontSize: 15.0),
+                        style: const TextStyle(fontSize: 15.0),
                         maxLines: 1,
                       ),
                     ))
@@ -85,9 +89,13 @@ class _HomePageState extends State<HomePage> {
                         builder: ((context) => const UploadPage())));
               },
             ),
-            const ListTile(
+            ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: AutoSizeText("Download Notes"),
+              title: const AutoSizeText("Download Notes"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => testing())));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
