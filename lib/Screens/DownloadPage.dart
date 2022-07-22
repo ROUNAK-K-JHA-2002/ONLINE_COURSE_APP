@@ -8,14 +8,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class testing extends StatefulWidget {
-  const testing({Key? key}) : super(key: key);
+class DownloadPage extends StatefulWidget {
+  const DownloadPage({Key? key}) : super(key: key);
 
   @override
-  State<testing> createState() => _testingState();
+  State<DownloadPage> createState() => _DownloadPageState();
 }
 
-class _testingState extends State<testing> {
+class _DownloadPageState extends State<DownloadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

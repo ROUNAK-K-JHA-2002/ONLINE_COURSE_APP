@@ -1,19 +1,12 @@
-// ignore_for_file: unnecessary_const, non_constant_identifier_names
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
-import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../subject_Pages/ChemistryPage.dart';
-import '../../subject_Pages/LifeSciPage.dart';
-import '../../subject_Pages/MathsPage.dart';
-import '../../subject_Pages/PhysicsPage.dart';
 
 class AdminPageGsign extends StatefulWidget {
   const AdminPageGsign({Key? key}) : super(key: key);
@@ -31,7 +24,28 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
   Widget build(BuildContext context) {
     List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
     List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
-    List index = [0, 1, 2, 3];
+    List Courses = [15, 17, 20, 13];
+    List indexHelper = [0, 1, 2, 3];
+    List SubjectPages = [
+      "MathsPage",
+      "PhysicsPage",
+      "ChemistryPage",
+      "LifeSciPage"
+    ];
+    List SideBarContents = [
+      "Home",
+      "Upload Materials",
+      "Download Notes",
+      "Profile",
+      "Logout"
+    ];
+    List<IconData> SideBarIcons = [
+      Icons.home,
+      Icons.upload_rounded,
+      Icons.download_rounded,
+      Icons.account_circle_rounded,
+      Icons.logout
+    ];
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -46,8 +60,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(235, 220, 1, 232),
-                    Color.fromARGB(255, 5, 117, 252),
+                    Color.fromARGB(255, 215, 5, 190),
+                    Color.fromARGB(255, 35, 125, 250),
                   ],
                 ),
               ),
@@ -71,54 +85,91 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                     ))
                   ]),
             ),
-            // ignore: unused_local_variable
-
-            const ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Home"),
-            ),
             ListTile(
-              leading: const Icon(Icons.upload_rounded),
-              title: const Text("Upload Materials"),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const UploadPage())));
-              },
-            ),
-            const ListTile(
-              leading: Icon(Icons.download_rounded),
-              title: Text("Download Notes"),
-            ),
+                leading: Icon(
+                  SideBarIcons[0],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[0]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/HomePage');
+                }),
             ListTile(
-              leading: const Icon(Icons.account_circle_rounded),
-              title: const Text("Profile"),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const ProfilePage())));
-              },
-            ),
-            const ListTile(
-              leading: const Icon(Icons.question_mark_rounded),
-              title: Text("About App"),
-            ),
+                leading: Icon(
+                  SideBarIcons[1],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[1]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/UploadPage');
+                }),
             ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
-              onTap: () async {
-                await FirebaseServices().signOut();
-                Navigator.pushReplacementNamed(context, '/');
-                Fluttertoast.showToast(msg: "LogOut Sucessful");
-              },
-            ),
+                leading: Icon(
+                  SideBarIcons[2],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[2]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/Downloadpage');
+                }),
+            ListTile(
+                leading: Icon(
+                  SideBarIcons[3],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[3]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/ProfilePage');
+                }),
+            ListTile(
+                leading: Icon(
+                  SideBarIcons[4],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[4]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/');
+                })
           ],
         ),
       ),
       body: Container(
-        color: const Color.fromARGB(104, 254, 192, 249),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(236, 165, 252, 152),
+              Color.fromARGB(245, 252, 223, 237),
+              Color.fromARGB(245, 255, 176, 250),
+            ],
+          ),
+        ),
         child: Column(children: <Widget>[
           Container(
             margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
@@ -128,8 +179,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromARGB(255, 170, 0, 255),
-                    Color.fromARGB(245, 23, 2, 255),
+                    Color.fromARGB(255, 242, 3, 255),
+                    Color.fromARGB(245, 29, 15, 179),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(35.0),
@@ -173,7 +224,7 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                       child: Container(
                         //
                         padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.01),
+                            MediaQuery.of(context).size.width * 0.02),
                         margin: EdgeInsets.only(
                             top: MediaQuery.of(context).size.width * 0.18,
                             right: MediaQuery.of(context).size.width * 0.03),
@@ -230,7 +281,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.width * 0.04),
+                    vertical: MediaQuery.of(context).size.width * 0.04,
+                  ),
                   child: const AutoSizeText(
                     "Explore",
                     textAlign: TextAlign.start,
@@ -241,18 +293,23 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                   ),
                 ),
                 Expanded(
-                    flex: 3,
-                    child: SingleChildScrollView(
-                      child: Wrap(
-                        children: index.map((a) {
-                          return InkWell(
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.7),
+                      ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: indexHelper.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return InkWell(
                             child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.28,
-                                width:
-                                    MediaQuery.of(context).size.height * 0.21,
-                                margin: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.03),
+                                margin: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.015,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.025,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15.0),
@@ -272,9 +329,9 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                         alignment: Alignment.topCenter,
                                         padding: EdgeInsets.all(
                                             MediaQuery.of(context).size.width *
-                                                0.04),
+                                                0.035),
                                         child: Image.asset(
-                                            'assets/images/${Sub_photo[a]}.png'),
+                                            'assets/images/${Sub_photo[index]}.png'),
                                       ),
                                     ),
                                     Expanded(
@@ -283,11 +340,11 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                             vertical: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.02),
+                                                0.016),
                                         child: AutoSizeText(
-                                          "${Subjects[a]}",
+                                          "${Subjects[index]}",
                                           style: const TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
                                           maxLines: 1,
                                         ),
@@ -295,8 +352,8 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                     ),
                                     Expanded(
                                       flex: 1,
-                                      child: Text(
-                                        "${Subjects[a]}",
+                                      child: AutoSizeText(
+                                        "${Courses[index]} Courses",
                                         style: const TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
@@ -304,11 +361,12 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                                     ),
                                   ],
                                 )),
-                            onTap: () {},
-                          );
-                        }).toList(),
-                      ),
-                    ))
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, "/${SubjectPages[index]}");
+                            });
+                      }),
+                )
               ],
             ),
           )

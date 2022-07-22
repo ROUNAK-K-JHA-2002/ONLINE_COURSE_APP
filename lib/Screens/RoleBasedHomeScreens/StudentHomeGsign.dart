@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/DownloadPage.dart';
@@ -9,23 +7,45 @@ import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../../subject_Pages/ChemistryPage.dart';
-import '../../subject_Pages/LifeSciPage.dart';
-import '../../subject_Pages/MathsPage.dart';
-import '../../subject_Pages/PhysicsPage.dart';
 
-// ignore: must_be_immutable
 class StudentPageGsign extends StatefulWidget {
+  const StudentPageGsign({Key? key}) : super(key: key);
+
   @override
   State<StudentPageGsign> createState() => _StudentPageGsignState();
 }
 
 // ignore: camel_case_types
+
 class _StudentPageGsignState extends State<StudentPageGsign> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
+    List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
+    List Courses = [15, 17, 20, 13];
+    List indexHelper = [0, 1, 2, 3];
+    List SubjectPages = [
+      "MathsPage",
+      "PhysicsPage",
+      "ChemistryPage",
+      "LifeSciPage"
+    ];
+    List SideBarContents = [
+      "Home",
+      "Upload Materials",
+      "Download Notes",
+      "Profile",
+      "Logout"
+    ];
+    List<IconData> SideBarIcons = [
+      Icons.home,
+      Icons.upload_rounded,
+      Icons.download_rounded,
+      Icons.account_circle_rounded,
+      Icons.logout
+    ];
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -33,15 +53,15 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
         width: MediaQuery.of(context).size.width * 0.65,
         child: ListView(
           padding: EdgeInsets.zero,
-          children: <Widget>[
+          children: [
             DrawerHeader(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(235, 220, 1, 232),
-                    Color.fromARGB(255, 5, 117, 252),
+                    Color.fromARGB(255, 215, 5, 190),
+                    Color.fromARGB(255, 35, 125, 250),
                   ],
                 ),
               ),
@@ -58,59 +78,84 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                         backgroundImage: NetworkImage(
                             FirebaseAuth.instance.currentUser!.photoURL!),
                       ),
-                      accountName: AutoSizeText(
-                        "${FirebaseAuth.instance.currentUser!.displayName}",
-                        style: const TextStyle(fontSize: 18.0),
-                        maxLines: 1,
-                      ),
-                      accountEmail: AutoSizeText(
-                        "${FirebaseAuth.instance.currentUser!.email}",
-                        style: const TextStyle(fontSize: 15.0),
-                        maxLines: 1,
-                      ),
+                      accountName: Text(
+                          "${FirebaseAuth.instance.currentUser!.displayName}"),
+                      accountEmail:
+                          Text("${FirebaseAuth.instance.currentUser!.email}"),
                     ))
                   ]),
             ),
-            const ListTile(
-              leading: const Icon(Icons.home),
-              title: const AutoSizeText("Home"),
-            ),
             ListTile(
-              leading: const Icon(Icons.download_rounded),
-              title: const AutoSizeText("Download Notes"),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => testing())));
-              },
-            ),
+                leading: Icon(
+                  SideBarIcons[0],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[0]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/HomePage');
+                }),
             ListTile(
-              leading: const Icon(Icons.account_circle_rounded),
-              title: const AutoSizeText("Profile"),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => const ProfilePage())));
-              },
-            ),
+                leading: Icon(
+                  SideBarIcons[2],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[2]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/Downloadpage');
+                }),
             ListTile(
-              leading: const Icon(Icons.logout),
-              title: const AutoSizeText("Logout"),
-              onTap: () async {
-                await FirebaseServices().signOut();
-                Navigator.pushReplacementNamed(context, '/');
-                Fluttertoast.showToast(msg: "LogOut Sucessful");
-              },
-            ),
-            const ListTile(
-              leading: const Icon(Icons.question_mark_rounded),
-              title: AutoSizeText("About App"),
-            ),
+                leading: Icon(
+                  SideBarIcons[3],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[3]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/ProfilePage');
+                }),
+            ListTile(
+                leading: Icon(
+                  SideBarIcons[4],
+                  color: Colors.deepPurple,
+                ),
+                title: AutoSizeText(
+                  "${SideBarContents[4]}",
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, '/');
+                })
           ],
         ),
       ),
       body: Container(
-        color: const Color.fromARGB(104, 254, 192, 249),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(236, 165, 252, 152),
+              Color.fromARGB(245, 252, 223, 237),
+              Color.fromARGB(245, 255, 176, 250),
+            ],
+          ),
+        ),
         child: Column(children: <Widget>[
           Container(
             margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
@@ -120,8 +165,8 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromARGB(255, 170, 0, 255),
-                    Color.fromARGB(245, 23, 2, 255),
+                    Color.fromARGB(255, 242, 3, 255),
+                    Color.fromARGB(245, 29, 15, 179),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(35.0),
@@ -148,16 +193,15 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AutoSizeText(
+                          const Text(
                             "Hello,",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 30.0),
+                                TextStyle(color: Colors.white, fontSize: 35.0),
                           ),
-                          AutoSizeText(
+                          Text(
                             "${FirebaseAuth.instance.currentUser!.displayName}",
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 22.0),
-                            maxLines: 1,
+                                color: Colors.white, fontSize: 25.0),
                           ),
                         ],
                       ),
@@ -166,7 +210,7 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                       child: Container(
                         //
                         padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.01),
+                            MediaQuery.of(context).size.width * 0.02),
                         margin: EdgeInsets.only(
                             top: MediaQuery.of(context).size.width * 0.18,
                             right: MediaQuery.of(context).size.width * 0.03),
@@ -196,25 +240,22 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                          flex: 3,
                           child: TextField(
-                            cursorColor:
-                                const Color.fromARGB(213, 101, 30, 255),
-                            decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.search_rounded),
-                                suffixIcon: const Icon(Icons.mic),
-                                fillColor:
-                                    const Color.fromARGB(255, 255, 252, 252),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 15),
-                                hintText: 'Search ...',
-                                hintStyle:
-                                    const TextStyle(color: Colors.deepPurple)),
-                          )),
+                        cursorColor: const Color.fromARGB(213, 101, 30, 255),
+                        decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.search_rounded),
+                            suffixIcon: const Icon(Icons.mic),
+                            fillColor: const Color.fromARGB(255, 255, 252, 252),
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            hintText: 'Search ...',
+                            hintStyle:
+                                const TextStyle(color: Colors.deepPurple)),
+                      ))
                     ],
                   ),
                 )
@@ -226,169 +267,35 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.width * 0.05),
+                    vertical: MediaQuery.of(context).size.width * 0.04,
+                  ),
                   child: const AutoSizeText(
                     "Explore",
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    maxFontSize: 30.0,
                   ),
                 ),
                 Expanded(
-                    flex: 3,
-                    child: ListView(children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: InkWell(
-                              child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.28,
-                                  margin: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width * 0.03),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color.fromARGB(94, 38, 35, 35),
-                                          blurRadius: 5,
-                                          spreadRadius: 2,
-                                          offset: Offset(4, 4)),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          alignment: Alignment.topCenter,
-                                          padding: EdgeInsets.all(
-                                              MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.04),
-                                          child: Image.asset(
-                                              'assets/images/maths.png'),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.02),
-                                          child: const AutoSizeText(
-                                            "MATHEMATICS",
-                                            style: TextStyle(
-                                                fontSize: 22.0,
-                                                fontWeight: FontWeight.w400),
-                                            maxLines: 1,
-                                          ),
-                                        ),
-                                      ),
-                                      const Expanded(
-                                        flex: 1,
-                                        child: AutoSizeText(
-                                          "20 Courses",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w300),
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const MathsPage(
-                                              title: 'Mathematics',
-                                            )));
-                              },
-                            ),
-                          ),
-                          Expanded(
-                              child: InkWell(
-                            child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.28,
-                                margin: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.03),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Color.fromARGB(94, 38, 35, 35),
-                                        blurRadius: 5,
-                                        spreadRadius: 2,
-                                        offset: Offset(4, 4)),
-                                  ],
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        alignment: Alignment.topCenter,
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width *
-                                                0.04),
-                                        child: Image.asset(
-                                            'assets/images/physics.png'),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02),
-                                        child: const AutoSizeText(
-                                          "PHYSICS",
-                                          style: TextStyle(
-                                              fontSize: 22.0,
-                                              fontWeight: FontWeight.w400),
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ),
-                                    const Expanded(
-                                      flex: 1,
-                                      child: AutoSizeText(
-                                        "20 Courses",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w300),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            onTap: (() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const PhysicsPage(
-                                            title: "Physics",
-                                          )));
-                            }),
-                          ))
-                        ],
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.7),
                       ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                              child: InkWell(
+                      scrollDirection: Axis.vertical,
+                      itemCount: indexHelper.length,
+                      itemBuilder: (BuildContext context, index) {
+                        return InkWell(
                             child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.28,
-                                margin: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.03),
+                                margin: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.width * 0.015,
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.025,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15.0),
@@ -408,9 +315,9 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                         alignment: Alignment.topCenter,
                                         padding: EdgeInsets.all(
                                             MediaQuery.of(context).size.width *
-                                                0.04),
+                                                0.035),
                                         child: Image.asset(
-                                            'assets/images/chemistry.png'),
+                                            'assets/images/${Sub_photo[index]}.png'),
                                       ),
                                     ),
                                     Expanded(
@@ -419,110 +326,33 @@ class _StudentPageGsignState extends State<StudentPageGsign> {
                                             vertical: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.02),
-                                        child: const AutoSizeText(
-                                          "CHEMISTRY",
-                                          style: TextStyle(
+                                                0.016),
+                                        child: AutoSizeText(
+                                          "${Subjects[index]}",
+                                          style: const TextStyle(
                                               fontSize: 22.0,
                                               fontWeight: FontWeight.w400),
                                           maxLines: 1,
                                         ),
                                       ),
                                     ),
-                                    const Expanded(
+                                    Expanded(
                                       flex: 1,
                                       child: AutoSizeText(
-                                        "20 Courses",
-                                        style: TextStyle(
+                                        "${Courses[index]} Courses",
+                                        style: const TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.w300),
-                                        maxLines: 1,
                                       ),
                                     ),
                                   ],
                                 )),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const ChemistryPage(
-                                            title: "Chemistry",
-                                          )));
-                            },
-                          )),
-                          Expanded(
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.28,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.03),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15.0),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Color.fromARGB(94, 38, 35, 35),
-                                      blurRadius: 5,
-                                      spreadRadius: 2,
-                                      offset: Offset(4, 4)),
-                                ],
-                              ),
-                              child: InkWell(
-                                child: Column(
-                                  children: <Widget>[
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        alignment: Alignment.topCenter,
-                                        padding: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width *
-                                                0.04),
-                                        child: Image.asset(
-                                            'assets/images/life.png'),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02),
-                                        child: const AutoSizeText(
-                                          "LIFE SCIENCE",
-                                          style: TextStyle(
-                                              fontSize: 23.0,
-                                              fontWeight: FontWeight.w400),
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ),
-                                    const Expanded(
-                                      flex: 1,
-                                      child: AutoSizeText(
-                                        "20 Courses",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.w300),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LifeSciencePage(
-                                                title: "Life Science",
-                                              )));
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ])),
+                              Navigator.pushNamed(
+                                  context, "/${SubjectPages[index]}");
+                            });
+                      }),
+                )
               ],
             ),
           )

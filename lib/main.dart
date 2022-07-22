@@ -1,4 +1,11 @@
-import 'package:eduapp/Screens/Homescreen.dart';
+import 'package:eduapp/Screens/DownloadPage.dart';
+import 'package:eduapp/Screens/ProfilePage.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeGsign.dart';
+import 'package:eduapp/Screens/UploadsPage.dart';
+import 'package:eduapp/subject_Pages/ChemistryPage.dart';
+import 'package:eduapp/subject_Pages/LifeSciPage.dart';
+import 'package:eduapp/subject_Pages/MathsPage.dart';
+import 'package:eduapp/subject_Pages/PhysicsPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,8 +45,14 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginScreen(
               title: '',
             ),
-        '/homePage': ((context) => const HomePage("")),
-        '/AdminPageGsign': ((context) => const HomePage("AdminGSign"))
+        '/HomePage': (context) => const AdminPageGsign(),
+        '/UploadPage': (context) => const UploadPage(),
+        '/Downloadpage': (context) => const DownloadPage(),
+        '/ProfilePage': (context) => const ProfilePage(),
+        '/MathsPage': (context) => const MathsPage(title: ''),
+        '/ChemistryPage': (context) => const ChemistryPage(title: ''),
+        '/PhysicsPage': (context) => const PhysicsPage(title: ''),
+        '/LifeSciPage': (context) => const LifeSciencePage(title: ''),
       },
     );
   }
