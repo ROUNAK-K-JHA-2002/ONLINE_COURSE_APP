@@ -138,8 +138,10 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                     color: Colors.deepPurple,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
+                onTap: () async {
+                  await FirebaseServices().signOut();
+                  Navigator.pushReplacementNamed(context, '/');
+                  Fluttertoast.showToast(msg: "LogOut Sucessful");
                 })
           ],
         ),

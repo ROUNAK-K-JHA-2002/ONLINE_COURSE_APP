@@ -1,5 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
+
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
@@ -8,16 +11,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class AdminPageGsign extends StatefulWidget {
-  const AdminPageGsign({Key? key}) : super(key: key);
+class GSignHomePage extends StatefulWidget {
+  final String role;
+  const GSignHomePage({
+    required this.role,
+  });
 
   @override
-  State<AdminPageGsign> createState() => _AdminPageGsignState();
+  State<GSignHomePage> createState() => _GSignHomePageState();
 }
 
 // ignore: camel_case_types
 
-class _AdminPageGsignState extends State<AdminPageGsign> {
+class _GSignHomePageState extends State<GSignHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,20 +38,40 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
       "ChemistryPage",
       "LifeSciPage"
     ];
-    List SideBarContents = [
-      "Home",
-      "Upload Materials",
-      "Download Notes",
-      "Profile",
-      "Logout"
-    ];
-    List<IconData> SideBarIcons = [
-      Icons.home,
-      Icons.upload_rounded,
-      Icons.download_rounded,
-      Icons.account_circle_rounded,
-      Icons.logout
-    ];
+    List SideBarRoute = [];
+    List SideBarContents = [];
+    List<IconData> SideBarIcons = [];
+    if (widget.role == "Admin") {
+      SideBarContents = [
+        "Upload Materials",
+        "Download Notes",
+        "Profile",
+      ];
+      SideBarIcons = [
+        Icons.upload_rounded,
+        Icons.download_rounded,
+        Icons.account_circle_rounded,
+      ];
+      SideBarRoute = [
+        "/UploadPage",
+        "/Downloadpage",
+        "/ProfilePage",
+      ];
+    } else if (widget.role == "Student") {
+      SideBarContents = [
+        "Home",
+        "Download Notes",
+        "Profile",
+      ];
+      SideBarIcons = [
+        Icons.home,
+        Icons.download_rounded,
+        Icons.account_circle_rounded,
+      ];
+      SideBarRoute = ["/DownloadPage", "/Downloadpage", "/ProfilePage"];
+    }
+
+    print(widget.role);
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -85,76 +111,47 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
                     ))
                   ]),
             ),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[0],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[0]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/HomePage');
-                }),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[1],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[1]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/UploadPage');
-                }),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[2],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[2]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/Downloadpage');
-                }),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[3],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[3]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/ProfilePage');
-                }),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[4],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[4]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
-                })
+            SizedBox(
+              height: double.maxFinite,
+              child: ListView.builder(
+                  itemCount: indexHelper.length,
+                  itemBuilder: (context, index) {
+                    if (index == indexHelper.length - 1) {
+                      return (ListTile(
+                          leading: const Icon(
+                            Icons.logout,
+                            color: Colors.deepPurple,
+                          ),
+                          title: const AutoSizeText(
+                            "Log Out",
+                            style: TextStyle(
+                              color: Colors.deepPurple,
+                            ),
+                          ),
+                          onTap: () async {
+                            await FirebaseServices().signOut();
+                            Navigator.pushReplacementNamed(context, '/');
+                            Fluttertoast.showToast(msg: "LogOut Sucessful");
+                          }));
+                    }
+
+                    return ListTile(
+                        leading: Icon(
+                          SideBarIcons[index],
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        title: AutoSizeText(
+                          "${SideBarContents[index]}",
+                          style: const TextStyle(
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        onTap: () async {
+                          Navigator.pushNamed(
+                              context, '${SideBarRoute[index]}');
+                        });
+                  }),
+            )
           ],
         ),
       ),
@@ -375,3 +372,5 @@ class _AdminPageGsignState extends State<AdminPageGsign> {
     );
   }
 }
+
+class flag {}

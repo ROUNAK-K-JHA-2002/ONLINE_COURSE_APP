@@ -1,14 +1,16 @@
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
-import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeGsign.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import 'package:eduapp/Screens/UploadsPage.dart';
 import 'package:eduapp/subject_Pages/ChemistryPage.dart';
 import 'package:eduapp/subject_Pages/LifeSciPage.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:eduapp/subject_Pages/PhysicsPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'Screens/loginScreen.dart';
 
 Future<void> main() async {
@@ -45,7 +47,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginScreen(
               title: '',
             ),
-        '/HomePage': (context) => const AdminPageGsign(),
         '/UploadPage': (context) => const UploadPage(),
         '/Downloadpage': (context) => const DownloadPage(),
         '/ProfilePage': (context) => const ProfilePage(),

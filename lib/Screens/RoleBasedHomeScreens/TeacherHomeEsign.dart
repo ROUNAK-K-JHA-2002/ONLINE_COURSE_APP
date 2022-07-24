@@ -33,14 +33,12 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
       "LifeSciPage"
     ];
     List SideBarContents = [
-      "Home",
       "Upload Materials",
       "Download Notes",
       "Profile",
       "Logout"
     ];
     List<IconData> SideBarIcons = [
-      Icons.home,
       Icons.upload_rounded,
       Icons.download_rounded,
       Icons.account_circle_rounded,
@@ -97,7 +95,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/HomePage');
+                  Navigator.pushNamed(context, '/UploadPage');
                 }),
             ListTile(
                 leading: Icon(
@@ -111,7 +109,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/UploadPage');
+                  Navigator.pushNamed(context, '/Downloadpage');
                 }),
             ListTile(
                 leading: Icon(
@@ -125,7 +123,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/Downloadpage');
+                  Navigator.pushNamed(context, '/ProfilePage');
                 }),
             ListTile(
                 leading: Icon(
@@ -138,22 +136,10 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                     color: Colors.deepPurple,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/ProfilePage');
-                }),
-            ListTile(
-                leading: Icon(
-                  SideBarIcons[4],
-                  color: Colors.deepPurple,
-                ),
-                title: AutoSizeText(
-                  "${SideBarContents[4]}",
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
+                onTap: () async {
+                  await FirebaseServices().signOut();
+                  Navigator.pushReplacementNamed(context, '/');
+                  Fluttertoast.showToast(msg: "LogOut Sucessful");
                 })
           ],
         ),

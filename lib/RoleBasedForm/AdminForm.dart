@@ -1,8 +1,7 @@
-// ignore: file_names
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeEsign.dart';
-import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeGsign.dart';
+import 'package:eduapp/Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +19,8 @@ class AdminForm extends StatefulWidget {
 
 class _AdminFormState extends State<AdminForm>
     with SingleTickerProviderStateMixin {
-  //form key
-  // ignore: prefer_final_fields
-  GlobalKey<FormState> _formkeyForAdmin = GlobalKey<FormState>();
-
-  //Tab Controller
-  // TabController tabController = TabController(length: 1, vsync: this);
+  final GlobalKey<FormState> _formkeyForAdmin = GlobalKey<FormState>();
+  String role = "Admin";
 
   // editing Controller
   final TextEditingController emailControllerForAdmin = TextEditingController();
@@ -131,14 +126,18 @@ class _AdminFormState extends State<AdminForm>
             ],
           ),
           onPressed: () async {
-            var flag = "AdminGSign";
             await FirebaseServices().SignInWithGoogle();
             // Navigator.pushReplacement(
             //     context,
             //     MaterialPageRoute(
             //         builder: ((context) => const AdminPageGsign())));
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => AdminPageGsign()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GSignHomePage(
+                    role: "Admin",
+                  ),
+                ));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));

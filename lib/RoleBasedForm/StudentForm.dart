@@ -2,10 +2,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
-import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeGsign.dart';
+
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import '../Screens/Sign_Up_Screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -133,8 +134,12 @@ class _StudentFormState extends State<StudentForm>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => StudentPageGsign()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const GSignHomePage(
+                          role: 'Student',
+                        )));
             Fluttertoast.showToast(msg: "Login Sucessful");
           },
         ));
