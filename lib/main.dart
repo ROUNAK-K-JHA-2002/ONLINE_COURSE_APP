@@ -11,20 +11,43 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/loginScreen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
+
+User? userFlag = FirebaseAuth.instance.currentUser;
+void Checkuser() {
+  if (userFlag != null) {
+    print(userFlag);
+  } else {
+    print("null");
+  }
+}
+
+String? roleData = "";
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  getRoleData() async {
+    SharedPreferences Data = await SharedPreferences.getInstance();
+    String? role = Data.getString('roleData');
+    print(" role is $role");
+    roleData = role;
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Checkuser();
+    getRoleData();
+
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
@@ -42,10 +65,14 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/' : '/HomePage',
       routes: {
         '/': (context) => const LoginScreen(
               title: '',
+            ),
+        '/HomePage': (context) => GSignHomePage(
+              role: '$roleData',
             ),
         '/UploadPage': (context) => const UploadPage(),
         '/Downloadpage': (context) => const DownloadPage(),

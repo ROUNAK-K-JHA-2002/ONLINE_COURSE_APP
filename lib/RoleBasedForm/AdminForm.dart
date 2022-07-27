@@ -5,6 +5,7 @@ import 'package:eduapp/Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/Sign_Up_Screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -131,6 +132,11 @@ class _AdminFormState extends State<AdminForm>
             //     context,
             //     MaterialPageRoute(
             //         builder: ((context) => const AdminPageGsign())));
+
+            SharedPreferences roleData = await SharedPreferences.getInstance();
+            roleData.setString('roleData', "Admin");
+            print("23");
+
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

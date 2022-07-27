@@ -50,17 +50,17 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             width: MediaQuery.of(context).size.width * 1,
             padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.18,
-                bottom: MediaQuery.of(context).size.width * 0.1),
-            child: Row(children: <Widget>[
+                top: MediaQuery.of(context).size.width * 0.1,
+                bottom: MediaQuery.of(context).size.width * 0.15),
+            child: Column(children: <Widget>[
               Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.05),
+                  margin:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                   ),
                   child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.1,
+                    radius: MediaQuery.of(context).size.width * 0.15,
                     backgroundImage: NetworkImage(
                         FirebaseAuth.instance.currentUser!.photoURL!),
                   )),
@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 AutoSizeText(
                   "${FirebaseAuth.instance.currentUser!.email}",
-                  style: const TextStyle(color: Colors.white, fontSize: 19.0),
+                  style: const TextStyle(color: Colors.white, fontSize: 18.0),
                   maxLines: 1,
                 ),
               ]),

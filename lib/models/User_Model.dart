@@ -4,15 +4,21 @@ class UserModal {
   String? secondName;
   String? email;
 
-  UserModal({this.uid, this.email, this.firstName, this.secondName});
+  UserModal({
+    this.uid,
+    this.email,
+    this.firstName,
+    this.secondName,
+  });
 
   //Recieving Data from server
   factory UserModal.fromMap(map) {
     return UserModal(
-        uid: map['uid'],
-        email: map['email'],
-        firstName: map['FirstName'],
-        secondName: map['SecondName']);
+      uid: map['uid'],
+      email: map['email'],
+      firstName: map['FirstName'],
+      secondName: map['SecondName'],
+    );
   }
 
   //Sending data to server

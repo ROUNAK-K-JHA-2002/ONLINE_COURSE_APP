@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
+import 'package:eduapp/main.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,8 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController1 = TextEditingController();
   final TextEditingController passwordController2 = TextEditingController();
+
+  String? displayName;
   @override
   Widget build(BuildContext context) {
     //Input fields
@@ -280,7 +283,9 @@ class _SignUpState extends State<SignUp> {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {PostDetailsToFireBase()})
+          .then((value) => {userFlag!.updateDisplayName(displayName)})
           .catchError((e) => {Fluttertoast.showToast(msg: e!.message)});
+      print(displayName);
     }
   }
 
@@ -300,7 +305,7 @@ class _SignUpState extends State<SignUp> {
     userModal.email = user.email;
     userModal.firstName = firstNameController.text;
     userModal.secondName = lastNameController.text;
-
+    displayName = "${firstNameController.text} ${lastNameController.text}";
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)

@@ -6,10 +6,12 @@ import 'package:eduapp/Google-services/firebase-services.dart';
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/loginScreen.dart';
+import 'package:eduapp/main.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GSignHomePage extends StatefulWidget {
   final String role;
@@ -20,7 +22,6 @@ class GSignHomePage extends StatefulWidget {
   @override
   State<GSignHomePage> createState() => _GSignHomePageState();
 }
-
 // ignore: camel_case_types
 
 class _GSignHomePageState extends State<GSignHomePage> {
@@ -46,29 +47,25 @@ class _GSignHomePageState extends State<GSignHomePage> {
         "Upload Materials",
         "Download Notes",
         "Profile",
+        "Log Out"
       ];
       SideBarIcons = [
         Icons.upload_rounded,
         Icons.download_rounded,
         Icons.account_circle_rounded,
+        Icons.logout_rounded
       ];
-      SideBarRoute = [
-        "/UploadPage",
-        "/Downloadpage",
-        "/ProfilePage",
-      ];
+      var i = 0;
+      SideBarRoute = ["/UploadPage", "/Downloadpage", "/ProfilePage", "/"];
     } else if (widget.role == "Student") {
-      SideBarContents = [
-        "Home",
-        "Download Notes",
-        "Profile",
-      ];
+      SideBarContents = ["Home", "Download Notes", "Profile", "log out"];
       SideBarIcons = [
         Icons.home,
         Icons.download_rounded,
         Icons.account_circle_rounded,
+        Icons.logout_rounded
       ];
-      SideBarRoute = ["/DownloadPage", "/Downloadpage", "/ProfilePage"];
+      SideBarRoute = ["/DownloadPage", "/Downloadpage", "/ProfilePage", "/"];
     }
 
     print(widget.role);
@@ -114,27 +111,31 @@ class _GSignHomePageState extends State<GSignHomePage> {
             SizedBox(
               height: double.maxFinite,
               child: ListView.builder(
-                  itemCount: indexHelper.length,
+                  itemCount: widget.role == "Admin"
+                      ? indexHelper.length
+                      : indexHelper.length,
                   itemBuilder: (context, index) {
-                    if (index == indexHelper.length - 1) {
-                      return (ListTile(
-                          leading: const Icon(
-                            Icons.logout,
-                            color: Colors.deepPurple,
-                          ),
-                          title: const AutoSizeText(
-                            "Log Out",
-                            style: TextStyle(
-                              color: Colors.deepPurple,
-                            ),
-                          ),
-                          onTap: () async {
-                            await FirebaseServices().signOut();
-                            Navigator.pushReplacementNamed(context, '/');
-                            Fluttertoast.showToast(msg: "LogOut Sucessful");
-                          }));
-                    }
-
+                    // if (index == indexHelper.length - 1) {
+                    //   return (ListTile(
+                    //       leading: const Icon(
+                    //         Icons.logout,
+                    //         color: Colors.deepPurple,
+                    //       ),
+                    //       title: const AutoSizeText(
+                    //         "Log Out",
+                    //         style: TextStyle(
+                    //           color: Colors.deepPurple,
+                    //         ),
+                    //       ),
+                    //       onTap: () async {
+                    //         await FirebaseServices().signOut();
+                    //         SharedPreferences roleData =
+                    //             await SharedPreferences.getInstance();
+                    //         roleData.remove("roleData");
+                    //         Navigator.pushReplacementNamed(context, '/');
+                    //         Fluttertoast.showToast(msg: "LogOut Sucessful");
+                    //       }));
+                    // }
                     return ListTile(
                         leading: Icon(
                           SideBarIcons[index],
@@ -147,8 +148,20 @@ class _GSignHomePageState extends State<GSignHomePage> {
                           ),
                         ),
                         onTap: () async {
-                          Navigator.pushNamed(
-                              context, '${SideBarRoute[index]}');
+                          print(index);
+                          if (index < indexHelper.length - 1) {
+                            print("other items");
+                            Navigator.pushNamed(
+                                context, '${SideBarRoute[index]}');
+                          } else if (index == indexHelper.length - 1) {
+                            print("logout");
+                            await FirebaseServices().signOut();
+                            SharedPreferences roleData =
+                                await SharedPreferences.getInstance();
+                            roleData.remove("roleData");
+                            Navigator.pushReplacementNamed(context, '/');
+                            Fluttertoast.showToast(msg: "LogOut Sucessful");
+                          }
                         });
                   }),
             )

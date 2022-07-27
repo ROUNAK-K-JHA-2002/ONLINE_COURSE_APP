@@ -6,6 +6,7 @@ import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
 import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import '../Screens/Sign_Up_Screen.dart';
 
@@ -134,6 +135,9 @@ class _StudentFormState extends State<StudentForm>
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
+            SharedPreferences roleData = await SharedPreferences.getInstance();
+            roleData.setString('roleData', "Student");
+            print("23");
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
