@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,20 @@ class _LifeSciencePageState extends State<LifeSciencePage> {
         ),
         backgroundColor: Colors.lightGreenAccent.shade700,
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const AutoSizeText(
+          "Add Videos",
+          style: TextStyle(fontSize: 18),
+          maxLines: 1,
+        ),
+        elevation: 5,
+        extendedPadding:
+            EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
+        icon: const Icon(Icons.add),
+        backgroundColor: Color.fromARGB(255, 25, 178, 32),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
           child: Container(
         color: Colors.green.shade200,

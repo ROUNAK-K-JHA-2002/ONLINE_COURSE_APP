@@ -26,6 +26,14 @@ class GSignHomePage extends StatefulWidget {
 
 class _GSignHomePageState extends State<GSignHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  List SideBarRoute = [];
+  List SideBarContents = [];
+  List<IconData> SideBarIcons = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +47,7 @@ class _GSignHomePageState extends State<GSignHomePage> {
       "ChemistryPage",
       "LifeSciPage"
     ];
-    List SideBarRoute = [];
-    List SideBarContents = [];
-    List<IconData> SideBarIcons = [];
+
     if (widget.role == "Admin") {
       SideBarContents = [
         "Upload Materials",

@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:eduapp/Screens/AddVideos.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,6 +89,25 @@ class _MathsPageState extends State<MathsPage> {
         ),
         backgroundColor: Colors.red.shade600,
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddVideos(SubjectName: "Maths")));
+        },
+        label: const AutoSizeText(
+          "Add Videos",
+          style: TextStyle(fontSize: 18),
+          maxLines: 1,
+        ),
+        elevation: 5,
+        extendedPadding:
+            EdgeInsets.all(MediaQuery.of(context).size.width * 0.07),
+        icon: const Icon(Icons.add),
+        backgroundColor: Colors.red,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
           child: Container(
         color: Colors.deepOrange.shade200,
