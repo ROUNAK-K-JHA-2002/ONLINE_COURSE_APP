@@ -26,29 +26,20 @@ class GSignHomePage extends StatefulWidget {
 
 class _GSignHomePageState extends State<GSignHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List SideBarRoute = [];
-  List SideBarContents = [];
-  List<IconData> SideBarIcons = [];
+  late List SideBarRoute = [];
+  late List SideBarContents = [];
+  late List<IconData> SideBarIcons = [];
 
   @override
   void initState() {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
-    List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
-    List Courses = [15, 17, 20, 13];
-    List indexHelper = [0, 1, 2, 3];
-    List SubjectPages = [
-      "MathsPage",
-      "PhysicsPage",
-      "ChemistryPage",
-      "LifeSciPage"
-    ];
-
-    if (widget.role == "Admin") {
+  getRoleData() async {
+    SharedPreferences Data = await SharedPreferences.getInstance();
+    String? role = Data.getString('roleData');
+    print(" role is $role 55664455");
+    if (role == "Admin") {
       SideBarContents = [
         "Upload Materials",
         "Download Notes",
@@ -61,9 +52,9 @@ class _GSignHomePageState extends State<GSignHomePage> {
         Icons.account_circle_rounded,
         Icons.logout_rounded
       ];
-      var i = 0;
+
       SideBarRoute = ["/UploadPage", "/Downloadpage", "/ProfilePage", "/"];
-    } else if (widget.role == "Student") {
+    } else if (role == "Student") {
       SideBarContents = ["Home", "Download Notes", "Profile", "log out"];
       SideBarIcons = [
         Icons.home,
@@ -73,6 +64,21 @@ class _GSignHomePageState extends State<GSignHomePage> {
       ];
       SideBarRoute = ["/DownloadPage", "/Downloadpage", "/ProfilePage", "/"];
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    getRoleData();
+    List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
+    List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
+    List Courses = [15, 17, 20, 13];
+    List indexHelper = [0, 1, 2, 3];
+    List SubjectPages = [
+      "MathsPage",
+      "PhysicsPage",
+      "ChemistryPage",
+      "LifeSciPage"
+    ];
 
     print(widget.role);
     return Scaffold(
@@ -391,5 +397,3 @@ class _GSignHomePageState extends State<GSignHomePage> {
     );
   }
 }
-
-class flag {}

@@ -15,6 +15,8 @@ class _AddVideosState extends State<AddVideos> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController ytLinkController = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  List build1 = [];
+
   @override
   Widget build(BuildContext context) {
     final TitleInput = TextFormField(
@@ -154,6 +156,6 @@ class _AddVideosState extends State<AddVideos> {
   Future<void> getData() async {
     QuerySnapshot querySnapshot = await collectionReference.get();
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    print(allData[1]);
+    print(allData);
   }
 }

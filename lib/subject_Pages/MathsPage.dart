@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eduapp/Screens/AddVideos.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -18,6 +20,7 @@ class MathsPage extends StatefulWidget {
 
 class _MathsPageState extends State<MathsPage> {
   late YoutubePlayerController _ytbPlayerController;
+
   List<YoutubeModel> videosList = [
     const YoutubeModel(id: 1, youtubeId: 'EDVJotmT584'),
     const YoutubeModel(id: 2, youtubeId: 'f7IQqZ9zBiY'),
@@ -41,6 +44,22 @@ class _MathsPageState extends State<MathsPage> {
     '2 hours : 6 lecture',
     '5 hours : 1 lecture'
   ];
+  List Array = [];
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection("Courses_link");
+  Future<void> getData() async {
+    QuerySnapshot querySnapshot = await collectionReference.get();
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+    print(allData);
+    print(Array);
+    // for (var i = 0; i < allData.length; i++) {
+    //   var link = allDat
+    //   setState(() {
+    //     Array.add(allData[i]!.link);
+    //   });
+    // }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -82,6 +101,7 @@ class _MathsPageState extends State<MathsPage> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -242,7 +262,7 @@ class _MathsPageState extends State<MathsPage> {
             padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.width * 0.02),
             decoration: BoxDecoration(
-              color: Colors.red.shade100,
+              color: Colors.pink.shade50,
               // borderRadius: BorderRadius.circular(25.0)),
             ),
             child: Column(
@@ -290,7 +310,7 @@ class _MathsPageState extends State<MathsPage> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.blue.shade100,
+                                  color: Colors.deepOrange.shade100,
                                   borderRadius: BorderRadius.circular(15)),
                               margin: EdgeInsets.symmetric(
                                   vertical:
