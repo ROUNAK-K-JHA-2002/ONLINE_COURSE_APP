@@ -194,7 +194,8 @@ class _GSignHomePageState extends State<GSignHomePage> {
         ),
         child: Column(children: <Widget>[
           Container(
-            margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
+            // margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.005),
             height: MediaQuery.of(context).size.height * 0.35,
             decoration: BoxDecoration(
                 gradient: const LinearGradient(

@@ -21,7 +21,7 @@ class MathsPage extends StatefulWidget {
 class _MathsPageState extends State<MathsPage> {
   late YoutubePlayerController _ytbPlayerController;
 
-  List<YoutubeModel> videosList = [
+  List videosList = [
     const YoutubeModel(id: 1, youtubeId: 'EDVJotmT584'),
     const YoutubeModel(id: 2, youtubeId: 'f7IQqZ9zBiY'),
     const YoutubeModel(id: 3, youtubeId: 'X5ZhbRjS0yE'),
@@ -49,15 +49,16 @@ class _MathsPageState extends State<MathsPage> {
       FirebaseFirestore.instance.collection("Courses_link");
   Future<void> getData() async {
     QuerySnapshot querySnapshot = await collectionReference.get();
-    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    print(allData);
+    List allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    print((allData[0]["link"]));
+
+    print(allData.length);
+    for (var i = 0; i < allData.length; i++) {
+      var data = allData[0]["link"];
+      videosList.add("const YoutubeModel(id: $i, youtubeId: $data)");
+    }
     print(Array);
-    // for (var i = 0; i < allData.length; i++) {
-    //   var link = allDat
-    //   setState(() {
-    //     Array.add(allData[i]!.link);
-    //   });
-    // }
   }
 
   @override
