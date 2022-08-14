@@ -6,6 +6,7 @@ import 'package:eduapp/subject_Pages/ChemistryPage.dart';
 import 'package:eduapp/subject_Pages/LifeSciPage.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:eduapp/subject_Pages/PhysicsPage.dart';
+import 'package:eduapp/subject_Pages/testpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,9 @@ Future<void> main() async {
 User? userFlag = FirebaseAuth.instance.currentUser;
 void Checkuser() {
   if (userFlag != null) {
-    print(userFlag);
+    // print(userFlag);
   } else {
-    print("null");
+    // print("null");
   }
 }
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
   getRoleData() async {
     SharedPreferences Data = await SharedPreferences.getInstance();
     String? role = Data.getString('roleData');
-    print(" role is $role");
+    // print(" role is $role");
     roleData = role;
   }
 
@@ -65,8 +66,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      //
       initialRoute:
           FirebaseAuth.instance.currentUser == null ? '/' : '/HomePage',
+
+      // initialRoute: "/youtube",
       routes: {
         '/': (context) => const LoginScreen(
               title: '',
@@ -77,10 +81,13 @@ class MyApp extends StatelessWidget {
         '/UploadPage': (context) => const UploadPage(),
         '/Downloadpage': (context) => const DownloadPage(),
         '/ProfilePage': (context) => const ProfilePage(),
-        '/MathsPage': (context) => const MathsPage(title: ''),
+        '/MathsPage': (context) => const MathsPage(
+              title: '',
+            ),
         '/ChemistryPage': (context) => const ChemistryPage(title: ''),
         '/PhysicsPage': (context) => const PhysicsPage(title: ''),
-        '/LifeSciPage': (context) => const LifeSciencePage(title: ''),
+        '/LifeSciPage': (context) => const LifeSciPage(title: ''),
+        '/youtube': (context) => const testing(title: ''),
       },
     );
   }

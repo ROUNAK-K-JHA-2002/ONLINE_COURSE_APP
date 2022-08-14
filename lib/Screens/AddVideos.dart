@@ -79,6 +79,7 @@ class _AddVideosState extends State<AddVideos> {
         onPressed: () {
           SendCourseData(
               title: titleController.text, link: ytLinkController.text);
+
           getData();
         },
       ),
@@ -143,16 +144,19 @@ class _AddVideosState extends State<AddVideos> {
 
   // ignore: non_constant_identifier_names
   Future SendCourseData({required String title, required String link}) async {
-    final data = FirebaseFirestore.instance.collection("Courses_link").doc();
+    final data = FirebaseFirestore.instance
+        .collection("Courses_link-${widget.SubjectName}")
+        .doc();
     final json = {
       "title": title,
       "link": link,
     };
     if (_formkey.currentState!.validate()) await {await data.set(json)};
+    Navigator.pushReplacementNamed(context, '/${widget.SubjectName}Page');
   }
 
   CollectionReference collectionReference =
-      FirebaseFirestore.instance.collection("Courses_link");
+      FirebaseFirestore.instance.collection("Courses_link-Maths");
   Future<void> getData() async {
     QuerySnapshot querySnapshot = await collectionReference.get();
     final allData = querySnapshot.docs.map((doc) => doc.data()).toList();

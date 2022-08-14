@@ -39,7 +39,7 @@ class _GSignHomePageState extends State<GSignHomePage> {
     SharedPreferences Data = await SharedPreferences.getInstance();
     String? role = Data.getString('roleData');
     print(" role is $role 55664455");
-    if (role == "Admin") {
+    if (role == "AdminGSign") {
       SideBarContents = [
         "Upload Materials",
         "Download Notes",
@@ -54,7 +54,7 @@ class _GSignHomePageState extends State<GSignHomePage> {
       ];
 
       SideBarRoute = ["/UploadPage", "/Downloadpage", "/ProfilePage", "/"];
-    } else if (role == "Student") {
+    } else if (role == "StudentGsign") {
       SideBarContents = ["Home", "Download Notes", "Profile", "log out"];
       SideBarIcons = [
         Icons.home,

@@ -134,7 +134,7 @@ class _AdminFormState extends State<AdminForm>
             //         builder: ((context) => const AdminPageGsign())));
 
             SharedPreferences roleData = await SharedPreferences.getInstance();
-            roleData.setString('roleData', "Admin");
+            roleData.setString('roleData', "AdminGSign");
             print("23");
 
             Navigator.pushReplacement(

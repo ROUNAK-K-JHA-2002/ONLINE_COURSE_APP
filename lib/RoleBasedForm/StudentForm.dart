@@ -136,7 +136,7 @@ class _StudentFormState extends State<StudentForm>
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
             SharedPreferences roleData = await SharedPreferences.getInstance();
-            roleData.setString('roleData', "Student");
+            roleData.setString('roleData', "StudentGsign");
             print("23");
             Navigator.pushReplacement(
                 context,
