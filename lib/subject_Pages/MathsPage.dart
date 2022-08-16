@@ -8,7 +8,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../Screens/AddVideos.dart';
-import '../models/youtubeModal.dart';
 
 class MathsPage extends StatefulWidget {
   const MathsPage({Key? key, required String title}) : super(key: key);
@@ -77,8 +76,19 @@ class _MathsPageState extends State<MathsPage> {
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            body: SingleChildScrollView(
-              child: Column(children: [
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(235, 251, 156, 155),
+                    Color.fromARGB(245, 252, 223, 237),
+                    Color.fromARGB(245, 245, 249, 168),
+                  ],
+                ),
+              ),
+              child: ListView(children: [
                 player,
                 const SizedBox(
                   height: 10,
@@ -130,9 +140,9 @@ class _MathsPageState extends State<MathsPage> {
                             horizontal:
                                 MediaQuery.of(context).size.width * 0.03),
                         alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "6,58,148 Views",
-                          style: TextStyle(
+                        child: Text(
+                          "${_random.nextInt(99999) + 500} Views",
+                          style: const TextStyle(
                             fontSize: 15.0,
                           ),
                         ),
@@ -165,15 +175,15 @@ class _MathsPageState extends State<MathsPage> {
                               margin: EdgeInsets.symmetric(
                                   horizontal:
                                       MediaQuery.of(context).size.width * 0.02),
-                              child: Row(children: const <Widget>[
-                                Icon(
+                              child: Row(children: <Widget>[
+                                const Icon(
                                   Icons.timer,
                                   size: 25.0,
                                   color: Colors.deepPurpleAccent,
                                 ),
                                 Text(
-                                  "72 hours",
-                                  style: TextStyle(
+                                  "${_random.nextInt(80) + 10} hours",
+                                  style: const TextStyle(
                                     fontSize: 17.0,
                                     color: Colors.deepPurpleAccent,
                                   ),
@@ -246,7 +256,7 @@ class _MathsPageState extends State<MathsPage> {
                                         );
                                       }
                                       return ListView(
-                                        physics: ScrollPhysics(),
+                                        physics: const ScrollPhysics(),
                                         children:
                                             snapshot.data!.docs.map((document) {
                                           return Center(
@@ -340,7 +350,7 @@ class _MathsPageState extends State<MathsPage> {
                                 Container(
                                   padding: EdgeInsets.all(
                                       MediaQuery.of(context).size.width * 0.03),
-                                  child: Column(children: [
+                                  child: ListView(children: [
                                     const Text(
                                         "The Laplace Transform, Elementary properties of Laplace transform, Laplace transform of derivatives and integrals, Laplace transform of unit step function and Impulse functions, Initial value theorem and Final value theorem"),
                                     Row(),

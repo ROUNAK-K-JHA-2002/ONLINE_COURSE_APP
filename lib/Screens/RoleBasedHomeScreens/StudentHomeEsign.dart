@@ -79,8 +79,7 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                         size: 80,
                         color: Color.fromARGB(255, 240, 244, 248),
                       ),
-                      accountName: Text(
-                          "${FirebaseAuth.instance.currentUser!.displayName}"),
+                      accountName: null,
                       accountEmail:
                           Text("${FirebaseAuth.instance.currentUser!.email}"),
                     ))
@@ -126,7 +125,7 @@ class _StudentPageEsignState extends State<StudentPageEsign> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/ProfilePage');
+                  Navigator.pushNamed(context, '/ProfilePageforemail');
                 }),
             ListTile(
                 leading: Icon(

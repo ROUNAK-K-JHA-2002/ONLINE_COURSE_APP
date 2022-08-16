@@ -6,13 +6,13 @@ import 'package:eduapp/subject_Pages/ChemistryPage.dart';
 import 'package:eduapp/subject_Pages/LifeSciPage.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
 import 'package:eduapp/subject_Pages/PhysicsPage.dart';
-import 'package:eduapp/subject_Pages/testpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Screens/ProfilePage1.dart';
 import 'Screens/loginScreen.dart';
 
 Future<void> main() async {
@@ -81,13 +81,13 @@ class MyApp extends StatelessWidget {
         '/UploadPage': (context) => const UploadPage(),
         '/Downloadpage': (context) => const DownloadPage(),
         '/ProfilePage': (context) => const ProfilePage(),
+        '/ProfilePageforemail': (context) => const ProfilePage1(),
         '/MathsPage': (context) => const MathsPage(
               title: '',
             ),
         '/ChemistryPage': (context) => const ChemistryPage(title: ''),
         '/PhysicsPage': (context) => const PhysicsPage(title: ''),
         '/LifeSciPage': (context) => const LifeSciPage(title: ''),
-        '/youtube': (context) => const testing(title: ''),
       },
     );
   }

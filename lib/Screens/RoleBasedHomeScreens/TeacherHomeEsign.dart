@@ -71,14 +71,12 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                         child: UserAccountsDrawerHeader(
                       decoration:
                           const BoxDecoration(color: Colors.transparent),
-                      // currentAccountPicture: ,
-                      // currentAccountPicture: const Icon(
-                      //   Icons.account_circle,
-                      //   size: 80,
-                      //   color: Color.fromARGB(255, 240, 244, 248),
-                      // ),
-                      accountName: Text(
-                          "${FirebaseAuth.instance.currentUser!.displayName}"),
+                      currentAccountPicture: const Icon(
+                        Icons.account_circle,
+                        size: 80,
+                        color: Color.fromARGB(255, 240, 244, 248),
+                      ),
+                      accountName: null,
                       accountEmail:
                           Text("${FirebaseAuth.instance.currentUser!.email}"),
                     ))
@@ -124,7 +122,7 @@ class _AdminPageEsignState extends State<AdminPageEsign> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/ProfilePage');
+                  Navigator.pushNamed(context, '/ProfilePageforemail');
                 }),
             ListTile(
                 leading: Icon(

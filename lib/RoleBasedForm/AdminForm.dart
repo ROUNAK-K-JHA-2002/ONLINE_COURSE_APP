@@ -108,30 +108,30 @@ class _AdminFormState extends State<AdminForm>
             side: const BorderSide(color: Colors.black)),
         child: MaterialButton(
           padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.width * 0.03),
+              vertical: MediaQuery.of(context).size.width * 0.02,
+              horizontal: MediaQuery.of(context).size.width * 0.18),
           child: Row(
             children: <Widget>[
               Expanded(
                   flex: 1,
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.08,
+                    height: MediaQuery.of(context).size.width * 0.1,
                     child: Image.asset('assets/images/google_logo.png'),
                   )),
               const Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: AutoSizeText(
-                    "Sign In With google",
-                    style: TextStyle(fontSize: 21.0),
+                    "Sign In ",
+                    style: TextStyle(
+                      fontSize: 25.0,
+                    ),
                     maxLines: 1,
+                    textAlign: TextAlign.center,
                   ))
             ],
           ),
           onPressed: () async {
             await FirebaseServices().SignInWithGoogle();
-            // Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: ((context) => const AdminPageGsign())));
 
             SharedPreferences roleData = await SharedPreferences.getInstance();
             roleData.setString('roleData', "AdminGSign");

@@ -41,7 +41,6 @@ dependencies:
     sdk: flutter
   flutter_secure_storage: ^5.0.2
   fluttertoast: ^8.0.9
-  gallery_saver: ^2.3.2
   google_fonts: ^3.0.1
   google_sign_in: ^5.3.3
   path_provider: ^2.0.11

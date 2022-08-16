@@ -127,27 +127,6 @@ class _GSignHomePageState extends State<GSignHomePage> {
                       ? indexHelper.length
                       : indexHelper.length,
                   itemBuilder: (context, index) {
-                    // if (index == indexHelper.length - 1) {
-                    //   return (ListTile(
-                    //       leading: const Icon(
-                    //         Icons.logout,
-                    //         color: Colors.deepPurple,
-                    //       ),
-                    //       title: const AutoSizeText(
-                    //         "Log Out",
-                    //         style: TextStyle(
-                    //           color: Colors.deepPurple,
-                    //         ),
-                    //       ),
-                    //       onTap: () async {
-                    //         await FirebaseServices().signOut();
-                    //         SharedPreferences roleData =
-                    //             await SharedPreferences.getInstance();
-                    //         roleData.remove("roleData");
-                    //         Navigator.pushReplacementNamed(context, '/');
-                    //         Fluttertoast.showToast(msg: "LogOut Sucessful");
-                    //       }));
-                    // }
                     return ListTile(
                         leading: Icon(
                           SideBarIcons[index],
