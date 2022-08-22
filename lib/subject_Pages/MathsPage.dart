@@ -196,7 +196,7 @@ class _MathsPageState extends State<MathsPage> {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: double.maxFinite,
                   child: DefaultTabController(
                     length: 2,

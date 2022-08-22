@@ -152,7 +152,8 @@ class _AddVideosState extends State<AddVideos> {
       "link": link,
     };
     if (_formkey.currentState!.validate()) await {await data.set(json)};
-    Navigator.pushReplacementNamed(context, '/${widget.SubjectName}Page');
+
+    Navigator.pop(context);
   }
 
   CollectionReference collectionReference =

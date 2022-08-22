@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:eduapp/Google-services/firebase-services.dart';
+import 'package:eduapp/Google-services/firebase-servicesStudent.dart';
 
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
@@ -69,6 +69,32 @@ class _GSignHomePageState extends State<GSignHomePage> {
   @override
   Widget build(BuildContext context) {
     getRoleData();
+
+    Future<bool> showExitPopup() async {
+      return await showDialog(
+            //show confirm dialogue
+            //the return value will be from "Yes" or "No" options
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const AutoSizeText('Exit App'),
+              content: const AutoSizeText('Do you want to exit an App?'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  //return false when click on "NO"
+                  child: const AutoSizeText('No'),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  //return true when click on "Yes"
+                  child: const AutoSizeText('Yes'),
+                ),
+              ],
+            ),
+          ) ??
+          false; //if showDialouge had returned null, then return false
+    }
+
     List Subjects = ['MATHEMATICS', 'PHYSICS', 'CHEMISTRY', 'LIFE SCIENCE'];
     List Sub_photo = ['maths', 'physics', 'chemistry', 'life'];
     List Courses = [15, 17, 20, 13];

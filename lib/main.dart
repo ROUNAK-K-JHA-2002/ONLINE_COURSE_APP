@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eduapp/Screens/DownloadPage.dart';
 import 'package:eduapp/Screens/ProfilePage.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/GSignInHome.dart';
 import 'package:eduapp/Screens/UploadsPage.dart';
+import 'package:eduapp/Screens/test.dart';
 import 'package:eduapp/subject_Pages/ChemistryPage.dart';
 import 'package:eduapp/subject_Pages/LifeSciPage.dart';
 import 'package:eduapp/subject_Pages/MathsPage.dart';
@@ -12,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Screens/ProfilePage1.dart';
 import 'Screens/loginScreen.dart';
 
 Future<void> main() async {
@@ -25,7 +26,7 @@ Future<void> main() async {
 User? userFlag = FirebaseAuth.instance.currentUser;
 void Checkuser() {
   if (userFlag != null) {
-    // print(userFlag);
+    print(userFlag);
   } else {
     // print("null");
   }
@@ -36,19 +37,21 @@ String? roleData = "";
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  getRoleData() async {
+  Future<String?> getRoleData() async {
     SharedPreferences Data = await SharedPreferences.getInstance();
     String? role = Data.getString('roleData');
     // print(" role is $role");
     roleData = role;
+
+    return role;
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Checkuser();
-    getRoleData();
 
+    getRoleData();
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
@@ -66,22 +69,21 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      //
+
       initialRoute:
           FirebaseAuth.instance.currentUser == null ? '/' : '/HomePage',
 
-      // initialRoute: "/youtube",
+      // initialRoute: "/",
       routes: {
-        '/': (context) => const LoginScreen(
+        '/': (context) => const Testing(
               title: '',
             ),
-        '/HomePage': (context) => GSignHomePage(
-              role: '$roleData',
+        '/HomePage': (context) => const GSignHomePage(
+              role: '',
             ),
         '/UploadPage': (context) => const UploadPage(),
         '/Downloadpage': (context) => const DownloadPage(),
         '/ProfilePage': (context) => const ProfilePage(),
-        '/ProfilePageforemail': (context) => const ProfilePage1(),
         '/MathsPage': (context) => const MathsPage(
               title: '',
             ),

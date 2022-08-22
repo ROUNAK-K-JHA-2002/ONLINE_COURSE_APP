@@ -1,12 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:eduapp/Google-services/firebase-services.dart';
-import 'package:eduapp/Screens/RoleBasedHomeScreens/TeacherHomeEsign.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eduapp/Google-services/firebase-servicesAdmin.dart';
 import 'package:eduapp/Screens/RoleBasedHomeScreens/GSignInHome.dart';
-import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Screens/Sign_Up_Screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,25 +79,6 @@ class _AdminFormState extends State<AdminForm>
           hintText: "Password"),
     );
 
-    //Login button
-    final loginButtonForAdmin = Material(
-      elevation: 5,
-      color: const Color.fromARGB(255, 83, 14, 243),
-      borderRadius: BorderRadius.circular(10.0),
-      child: MaterialButton(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-        minWidth: MediaQuery.of(context).size.width,
-        child: const AutoSizeText(
-          "Sign in",
-          style: TextStyle(
-              fontWeight: FontWeight.w600, fontSize: 20.0, color: Colors.white),
-          maxLines: 1,
-        ),
-        onPressed: () {
-          Signin(emailControllerForAdmin.text, passwordControllerForAdmin.text);
-        },
-      ),
-    );
     // ignore: non_constant_identifier_names
     final GoogleSignInBtnForAdmin = Material(
         elevation: 5,
@@ -131,12 +110,24 @@ class _AdminFormState extends State<AdminForm>
             ],
           ),
           onPressed: () async {
-            await FirebaseServices().SignInWithGoogle();
+            await FirebaseServices().SignInWithGoogleAdmin();
 
             SharedPreferences roleData = await SharedPreferences.getInstance();
             roleData.setString('roleData', "AdminGSign");
             print("23");
 
+            final user = FirebaseAuth.instance.currentUser!;
+
+            final json = {
+              "User-Id": user.uid,
+              "User-Name": user.displayName,
+              "User-Email": user.email,
+            };
+            // ignore: non_constant_identifier_names
+            final TeacherList = FirebaseFirestore.instance
+                .collection("Teacher-List")
+                .doc("user");
+            await TeacherList.set(json);
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -166,44 +157,6 @@ class _AdminFormState extends State<AdminForm>
               const SizedBox(
                 height: 10,
               ),
-              emailfieldForAdmin,
-              const SizedBox(
-                height: 15,
-              ),
-              passwordfieldForAdmin,
-              const SizedBox(
-                height: 15,
-              ),
-              loginButtonForAdmin,
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const AutoSizeText(
-                    "Don't have a account ? ",
-                    style: TextStyle(fontSize: 19.0),
-                    maxLines: 1,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUp()));
-                    },
-                    child: const AutoSizeText(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontSize: 21.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.blue),
-                      maxLines: 1,
-                    ),
-                  )
-                ],
-              ),
               const SizedBox(
                 height: 15,
               ),
@@ -211,21 +164,5 @@ class _AdminFormState extends State<AdminForm>
             ],
           )),
     ));
-  }
-
-  // ignore: non_constant_identifier_names
-  Signin(String email, String password) async {
-    if (_formkeyForAdmin.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        Fluttertoast.showToast(msg: "Login Successful");
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const AdminPageEsign()));
-      }).catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-    return "AdminEsign";
   }
 }

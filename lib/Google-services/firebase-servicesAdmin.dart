@@ -6,7 +6,7 @@ class FirebaseServices {
   final _googlesignin = GoogleSignIn(); //calling Google Sign In function
 
   // ignore: non_constant_identifier_names
-  SignInWithGoogle() async {
+  SignInWithGoogleAdmin() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googlesignin.signIn();
@@ -19,9 +19,11 @@ class FirebaseServices {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
 
-        print(googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
         print("object2");
+      }
+      if (googleSignInAccount == null) {
+        return null;
       }
     } on FirebaseAuthException catch (e) {
       print(e.message);

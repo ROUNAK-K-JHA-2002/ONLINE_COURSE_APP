@@ -1,14 +1,12 @@
 // ignore: file_names
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:eduapp/Google-services/firebase-services.dart';
-import 'package:eduapp/Screens/RoleBasedHomeScreens/StudentHomeEsign.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eduapp/Google-services/firebase-servicesStudent.dart';
 
-import 'package:eduapp/models/User_Model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/RoleBasedHomeScreens/GSignInHome.dart';
-import '../Screens/Sign_Up_Screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,24 +87,7 @@ class _StudentFormState extends State<StudentForm>
     );
 
     //Login button
-    final loginButtonForStudent = Material(
-      elevation: 5,
-      color: const Color.fromARGB(255, 83, 14, 243),
-      borderRadius: BorderRadius.circular(10.0),
-      child: MaterialButton(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-        minWidth: MediaQuery.of(context).size.width,
-        child: const Text(
-          "Sign in",
-          style: TextStyle(
-              fontWeight: FontWeight.w600, fontSize: 20.0, color: Colors.white),
-        ),
-        onPressed: () {
-          Signin(emailControllerForStudent.text,
-              passwordControllerForStudent.text);
-        },
-      ),
-    );
+
     // ignore: non_constant_identifier_names
     final GoogleSignInBtnForStudent = Material(
         elevation: 5,
@@ -114,43 +95,86 @@ class _StudentFormState extends State<StudentForm>
             borderRadius: BorderRadius.circular(20.0),
             side: const BorderSide(color: Colors.black)),
         child: MaterialButton(
-          padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.width * 0.02,
-              horizontal: MediaQuery.of(context).size.width * 0.18),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.1,
-                    child: Image.asset('assets/images/google_logo.png'),
-                  )),
-              const Expanded(
-                  flex: 5,
-                  child: AutoSizeText(
-                    "Sign In ",
-                    style: TextStyle(
-                      fontSize: 25.0,
-                    ),
-                    maxLines: 1,
-                    textAlign: TextAlign.center,
-                  ))
-            ],
-          ),
-          onPressed: () async {
-            await FirebaseServices().SignInWithGoogle();
-            SharedPreferences roleData = await SharedPreferences.getInstance();
-            roleData.setString('roleData', "StudentGsign");
-            print("23");
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const GSignHomePage(
-                          role: 'Student',
-                        )));
-            Fluttertoast.showToast(msg: "Login Sucessful");
-          },
-        ));
+            padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.width * 0.02,
+                horizontal: MediaQuery.of(context).size.width * 0.18),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.1,
+                      child: Image.asset('assets/images/google_logo.png'),
+                    )),
+                const Expanded(
+                    flex: 5,
+                    child: AutoSizeText(
+                      "Sign In ",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                      ),
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                    ))
+              ],
+            ),
+            onPressed: () async {
+              await FirebaseServices().SignInWithGoogleStudent();
+              SharedPreferences roleData =
+                  await SharedPreferences.getInstance();
+              roleData.setString('roleData', "StudentGsign");
+              print("23");
+
+              final user = FirebaseAuth.instance.currentUser!;
+              CollectionReference collectionReference =
+                  FirebaseFirestore.instance.collection("Student-List");
+
+              QuerySnapshot querySnapshot = await collectionReference.get();
+              final allData =
+                  querySnapshot.docs.map((doc) => doc.get("User-Id")).toList();
+              print(allData);
+              for (var i = 0; i < querySnapshot.docs.length; i++) {
+                if (allData[i] == user.uid) {
+                  final json = {
+                    "User-Id": user.uid,
+                    "User-Name": user.displayName,
+                    "User-Email": user.email,
+                  };
+                  // ignore: non_constant_identifier_names
+                  final StudentList = FirebaseFirestore.instance
+                      .collection("Student-List")
+                      .doc();
+                  await StudentList.set(json);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GSignHomePage(
+                                role: 'Student',
+                              )));
+                  Fluttertoast.showToast(msg: "Login Sucessful");
+                } else {
+                  showPopUp(context) {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Permission Denied'),
+                        content:
+                            const Text('This Email is registerted as Teacher.'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  showPopUp(context);
+                }
+              }
+            }));
 
     return SingleChildScrollView(
         child: Material(
@@ -170,65 +194,9 @@ class _StudentFormState extends State<StudentForm>
               const SizedBox(
                 height: 10,
               ),
-              emailfieldForStudent,
-              const SizedBox(
-                height: 15,
-              ),
-              passwordfieldForStudent,
-              const SizedBox(
-                height: 15,
-              ),
-              loginButtonForStudent,
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const AutoSizeText(
-                    "Don't have a account ? ",
-                    style: TextStyle(fontSize: 19.0),
-                    maxLines: 1,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUp()));
-                    },
-                    child: const AutoSizeText(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontSize: 21.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.blue),
-                      maxLines: 1,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
               GoogleSignInBtnForStudent
             ],
           )),
     ));
-  }
-
-  // ignore: non_constant_identifier_names
-  void Signin(String email, String password) async {
-    if (_formkeyForStudent.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        Fluttertoast.showToast(msg: "Login Successful");
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const StudentPageEsign()));
-      }).catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
   }
 }
